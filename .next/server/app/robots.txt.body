@@ -1,0 +1,4 @@
+User-Agent: *
+Allow: /
+
+Sitemap: https://kevin-resume.vercel.app/sitemap.xml
