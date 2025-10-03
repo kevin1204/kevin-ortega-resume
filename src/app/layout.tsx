@@ -27,10 +27,7 @@ export const metadata: Metadata = {
   themeColor: "#6b21a8",
   viewport: "width=device-width, initial-scale=1, maximum-scale=1",
   icons: {
-    icon: [
-      { url: "/favicon.png?v=2", sizes: "32x32", type: "image/png" },
-      { url: "/favicon.ico?v=2", sizes: "16x16", type: "image/x-icon" }
-    ],
+    icon: "/favicon.png?v=2",
     shortcut: "/favicon.png?v=2",
     apple: "/favicon.png?v=2",
   },
