@@ -370,8 +370,7 @@ export const touchFeedback = {
     scale: 0.96
   },
   transition: { 
-    duration: 0.1, 
-    ease: "easeOut" 
+    duration: 0.1
   }
 };
 

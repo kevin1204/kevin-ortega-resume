@@ -108,7 +108,7 @@ export function TimelinePreview({ entries }: TimelinePreviewProps) {
                 {/* Content */}
                 <MagneticCard className="flex-1 min-w-0" intensity={0.1}>
                   <Card 
-                    className={`group glass hover:shadow-2xl transition-all duration-500 bg-card/80 cursor-pointer relative overflow-hidden ${
+                    className={`group glass hover:shadow-2xl transition-all duration-300 ease-out bg-card/80 cursor-pointer relative overflow-hidden ${
                       expandedItem === entry.id 
                         ? 'shadow-lg !border-primary/50' 
                         : '!border-border/30 hover:!border-primary/20'
@@ -116,12 +116,12 @@ export function TimelinePreview({ entries }: TimelinePreviewProps) {
                     onClick={() => setExpandedItem(expandedItem === entry.id ? null : entry.id)}
                   >
                     {/* Running line outline effect */}
-                    <div className={`absolute inset-0 rounded-lg border-2 border-transparent transition-all duration-500 z-10 ${
+                    <div className={`absolute inset-0 rounded-lg border-2 border-transparent transition-all duration-300 ease-out z-10 ${
                       expandedItem === entry.id 
                         ? 'border-primary/30 animate-pulse' 
                         : 'group-hover:border-primary/30 group-hover:animate-pulse'
                     }`}></div>
-                    <div className={`absolute inset-0 rounded-lg border border-primary/20 transition-opacity duration-300 z-10 ${
+                    <div className={`absolute inset-0 rounded-lg border border-primary/20 transition-opacity duration-250 ease-out z-10 ${
                       expandedItem === entry.id 
                         ? 'opacity-100' 
                         : 'opacity-0 group-hover:opacity-100'
@@ -151,7 +151,7 @@ export function TimelinePreview({ entries }: TimelinePreviewProps) {
                             )}
                           </div>
                           
-                          <h3 className="text-lg sm:text-xl font-semibold mb-3 group-hover:text-primary transition-colors duration-300 break-words">
+                          <h3 className="text-lg sm:text-xl font-semibold mb-3 group-hover:text-primary transition-colors duration-250 ease-out break-words">
                             {entry.title}
                           </h3>
                           
@@ -172,19 +172,23 @@ export function TimelinePreview({ entries }: TimelinePreviewProps) {
                         </div>
                         
                         {/* Expand/Collapse button */}
-                        <button 
+                        <motion.button 
                           className="flex-shrink-0 p-1 hover:bg-muted/50 rounded-full transition-colors duration-200"
                           onClick={(e) => {
                             e.stopPropagation();
                             setExpandedItem(expandedItem === entry.id ? null : entry.id);
                           }}
+                          whileHover={{ scale: 1.1 }}
+                          whileTap={{ scale: 0.95 }}
+                          transition={{ duration: 0.2, ease: "easeOut" }}
                         >
-                          {expandedItem === entry.id ? (
-                            <ChevronUp className="h-4 w-4 text-muted-foreground" />
-                          ) : (
+                          <motion.div
+                            animate={{ rotate: expandedItem === entry.id ? 180 : 0 }}
+                            transition={{ duration: 0.3, ease: "easeInOut" }}
+                          >
                             <ChevronDown className="h-4 w-4 text-muted-foreground" />
-                          )}
-                        </button>
+                          </motion.div>
+                        </motion.button>
                       </div>
 
                       <p className="text-muted-foreground text-sm leading-relaxed break-words">
@@ -199,9 +203,12 @@ export function TimelinePreview({ entries }: TimelinePreviewProps) {
                           opacity: expandedItem === entry.id ? 1 : 0
                         }}
                         transition={{ 
-                          duration: 0.4, 
-                          ease: "easeOut",
-                          opacity: { duration: 0.3 }
+                          duration: 0.3, 
+                          ease: "easeInOut",
+                          opacity: { 
+                            duration: 0.25,
+                            ease: "easeInOut"
+                          }
                         }}
                         className="overflow-hidden"
                       >
