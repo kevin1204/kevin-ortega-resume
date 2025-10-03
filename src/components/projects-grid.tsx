@@ -10,10 +10,8 @@ import { Badge } from '@/components/ui/badge';
 import { ExternalLink, ArrowRight } from 'lucide-react';
 import type { Project } from '@/lib/types';
 import { 
-  scrollRevealVariants, 
   gridStaggerVariants, 
   gridItemVariants,
-  buttonHoverVariants,
   mobileScrollReveal,
   touchFeedback
 } from '@/lib/animations';

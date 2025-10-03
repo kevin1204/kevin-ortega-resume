@@ -368,7 +368,7 @@ export const mobileScrollReveal: Variants = {
 export const touchFeedback = {
   whileTap: { 
     scale: 0.96,
-    transition: { duration: 0.1, ease: [0.4, 0.0, 0.2, 1] }
+    transition: { duration: 0.1, ease: "easeOut" }
   }
 };
 

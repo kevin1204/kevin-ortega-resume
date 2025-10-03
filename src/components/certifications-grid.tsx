@@ -8,10 +8,8 @@ import { Badge } from '@/components/ui/badge';
 import { ExternalLink } from 'lucide-react';
 import type { Certification } from '@/lib/types';
 import { 
-  scrollRevealVariants, 
   gridStaggerVariants, 
   gridItemVariants,
-  buttonHoverVariants,
   mobileScrollReveal,
   touchFeedback
 } from '@/lib/animations';

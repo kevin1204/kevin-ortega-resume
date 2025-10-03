@@ -8,7 +8,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Calendar, MapPin, Building, ArrowRight, GraduationCap, Briefcase, ChevronDown, ChevronUp } from 'lucide-react';
 import Link from 'next/link';
 import type { TimelineEntry } from '@/lib/types';
-import { staggerContainer, staggerItem, scrollRevealVariants } from '@/lib/animations';
+import { staggerContainer, staggerItem } from '@/lib/animations';
 import { MagneticCard } from '@/components/magnetic-card';
 
 interface TimelinePreviewProps {
