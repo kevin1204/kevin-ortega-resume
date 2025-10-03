@@ -80,22 +80,40 @@ export function TimelinePreview({ entries }: TimelinePreviewProps) {
           </motion.p>
         </motion.div>
 
-        <motion.div
-          variants={staggerContainer}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          className="space-y-4 sm:space-y-6 max-w-5xl mx-auto"
-        >
+        <div className="space-y-4 sm:space-y-6 max-w-5xl mx-auto">
           {recentEntries.map((entry, index) => (
             <motion.div
               key={entry.id}
-              variants={staggerItem}
+              initial={{ opacity: 0, y: 50, scale: 0.95 }}
+              whileInView={{ 
+                opacity: 1, 
+                y: 0, 
+                scale: 1,
+                transition: { 
+                  duration: 0.6, 
+                  delay: index * 0.1,
+                  ease: "easeOut"
+                }
+              }}
+              viewport={{ once: true, amount: 0.3 }}
               className="relative"
             >
               <div className="flex items-start gap-3 sm:gap-6">
                 {/* Timeline dot */}
-                <div className="flex-shrink-0">
+                <motion.div 
+                  className="flex-shrink-0"
+                  initial={{ opacity: 0, scale: 0 }}
+                  whileInView={{ 
+                    opacity: 1, 
+                    scale: 1,
+                    transition: { 
+                      duration: 0.5, 
+                      delay: index * 0.1 + 0.2,
+                      ease: "easeOut"
+                    }
+                  }}
+                  viewport={{ once: true, amount: 0.3 }}
+                >
                   <div className={`w-8 h-8 sm:w-12 sm:h-12 ${getTypeColor(entry.type)} rounded-full flex items-center justify-center text-white shadow-lg`}>
                     {entry.type === 'education' ? (
                       <GraduationCap className="h-4 w-4 sm:h-6 sm:w-6" />
@@ -103,18 +121,32 @@ export function TimelinePreview({ entries }: TimelinePreviewProps) {
                       <Briefcase className="h-4 w-4 sm:h-6 sm:w-6" />
                     )}
                   </div>
-                </div>
+                </motion.div>
 
                 {/* Content */}
-                <MagneticCard className="flex-1 min-w-0" intensity={0.1}>
-                  <Card 
-                    className={`group glass hover:shadow-2xl transition-all duration-300 ease-out bg-card/80 cursor-pointer relative overflow-hidden ${
-                      expandedItem === entry.id 
-                        ? 'shadow-lg !border-primary/50' 
-                        : '!border-border/30 hover:!border-primary/20'
-                    }`}
-                    onClick={() => setExpandedItem(expandedItem === entry.id ? null : entry.id)}
-                  >
+                <motion.div 
+                  className="flex-1 min-w-0"
+                  initial={{ opacity: 0, x: 30 }}
+                  whileInView={{ 
+                    opacity: 1, 
+                    x: 0,
+                    transition: { 
+                      duration: 0.6, 
+                      delay: index * 0.1 + 0.1,
+                      ease: "easeOut"
+                    }
+                  }}
+                  viewport={{ once: true, amount: 0.3 }}
+                >
+                  <MagneticCard className="flex-1 min-w-0" intensity={0.1}>
+                    <Card 
+                      className={`group glass hover:shadow-2xl transition-all duration-300 ease-out bg-card/80 cursor-pointer relative overflow-hidden ${
+                        expandedItem === entry.id 
+                          ? 'shadow-lg !border-primary/50' 
+                          : '!border-border/30 hover:!border-primary/20'
+                      }`}
+                      onClick={() => setExpandedItem(expandedItem === entry.id ? null : entry.id)}
+                    >
                     {/* Running line outline effect */}
                     <div className={`absolute inset-0 rounded-lg border-2 border-transparent transition-all duration-300 ease-out z-10 ${
                       expandedItem === entry.id 
@@ -235,11 +267,12 @@ export function TimelinePreview({ entries }: TimelinePreviewProps) {
                     </CardContent>
                   </Card>
                 </MagneticCard>
+                </motion.div>
               </div>
 
             </motion.div>
           ))}
-        </motion.div>
+        </div>
 
         <motion.div
           variants={staggerItem}
