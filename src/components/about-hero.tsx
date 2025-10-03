@@ -74,6 +74,14 @@ export function AboutHero({ siteConfig }: AboutHeroProps) {
                 I specialize in creating end-to-end solutions that not only meet technical requirements 
                 but also deliver measurable business value and exceptional user experiences.
               </p>
+              
+              <p>
+                I&apos;m passionate about AI and artificial intelligence, always exploring new AI tools and 
+                technologies to discover how they can make our lives more efficient and productive. 
+                I believe in the transformative power of AI to solve complex problems and enhance 
+                human capabilities, and I&apos;m constantly experimenting with the latest AI innovations 
+                to stay at the forefront of technological advancement.
+              </p>
             </motion.div>
             
             <motion.div 

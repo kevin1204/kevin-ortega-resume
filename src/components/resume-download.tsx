@@ -39,7 +39,7 @@ export function ResumeDownload() {
                   href="/resume.pdf" 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  download="Kevin-Ortega-Rodriguez-Resume.pdf"
+                  download="Kevin_Ortega-Resume.pdf"
                 >
                   <Download className="mr-2 h-5 w-5 transition-transform group-hover:translate-y-1" />
                   Download PDF Resume

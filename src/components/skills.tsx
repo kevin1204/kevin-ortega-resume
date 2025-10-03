@@ -8,7 +8,7 @@ const skills = [
   // Frontend
   { category: 'Frontend Development', skills: ['React', 'Next.js', 'TypeScript', 'Tailwind CSS', 'Framer Motion'] },
   // Backend
-  { category: 'Backend & Architecture', skills: ['Node.js', 'Express', 'MongoDB', 'PostgreSQL', 'REST APIs', 'System Design'] },
+  { category: 'Backend & Architecture', skills: ['Node.js', 'Express', 'Python', 'MongoDB', 'PostgreSQL', 'REST APIs', 'System Design'] },
   // Technical Leadership
   { category: 'Technical Leadership', skills: ['Solutions Architecture', 'Technical Account Management', 'System Integration', 'API Design', 'Performance Optimization'] },
   // Business & Management
