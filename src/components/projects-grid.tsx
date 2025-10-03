@@ -13,7 +13,9 @@ import {
   scrollRevealVariants, 
   gridStaggerVariants, 
   gridItemVariants,
-  buttonHoverVariants
+  buttonHoverVariants,
+  mobileScrollReveal,
+  touchFeedback
 } from '@/lib/animations';
 import { LoadingGrid } from '@/components/loading';
 
@@ -44,13 +46,23 @@ export function ProjectsGrid({ projects }: ProjectsGridProps) {
           animate="visible"
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
         >
-          {projects.map((project) => (
+          {projects.map((project, index) => (
           <motion.div key={project.id} variants={gridItemVariants}>
-            <Card className="group h-full overflow-hidden transition-all duration-300 hover:shadow-lg hover:border-primary/60 hover:shadow-primary/10 relative">
-              {/* Running line outline effect */}
-              <div className="absolute inset-0 rounded-lg border-2 border-transparent group-hover:border-primary/30 transition-all duration-500 group-hover:animate-pulse z-10"></div>
-              <div className="absolute inset-0 rounded-lg border border-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10"></div>
-              <CardContent className="p-0 relative z-20">
+            <motion.div
+              variants={mobileScrollReveal}
+              initial="hidden"
+              {...(index < 3 
+                ? { animate: "visible" }
+                : { 
+                    whileInView: "visible",
+                    viewport: { once: true, amount: 0.5 }
+                  }
+              )}
+              className="h-full"
+            >
+              <motion.div {...touchFeedback} className="h-full">
+                <Card className="group h-full overflow-hidden transition-all duration-300 hover:shadow-lg">
+              <CardContent className="p-0">
                 <div className="relative overflow-hidden">
                   <Image
                     src={project.cover}
@@ -91,7 +103,7 @@ export function ProjectsGrid({ projects }: ProjectsGridProps) {
                 
                 <div className="p-6">
                   <div className="mb-3">
-                    <h3 className="text-xl font-semibold mb-1 group-hover:text-primary transition-colors duration-300">{project.title}</h3>
+                    <h3 className="text-xl font-semibold mb-1">{project.title}</h3>
                     <p className="text-sm text-muted-foreground">{project.role}</p>
                   </div>
                   
@@ -116,6 +128,8 @@ export function ProjectsGrid({ projects }: ProjectsGridProps) {
                 </div>
               </CardContent>
             </Card>
+              </motion.div>
+            </motion.div>
           </motion.div>
         ))}
         </motion.div>

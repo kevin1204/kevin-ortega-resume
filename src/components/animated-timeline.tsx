@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { ExternalLink, Calendar, MapPin, Building, GraduationCap, Briefcase } from 'lucide-react';
 import type { TimelineEntry } from '@/lib/types';
-import { timelineItemVariants, timelineLineVariants, staggerContainer, staggerItem } from '@/lib/animations';
+import { timelineItemVariants, timelineLineVariants, staggerContainer, staggerItem, mobileScrollReveal, touchFeedback } from '@/lib/animations';
 
 interface AnimatedTimelineProps {
   entries: TimelineEntry[];
@@ -114,9 +114,18 @@ export function AnimatedTimeline({ entries }: AnimatedTimelineProps) {
 
             {/* Content */}
             <motion.div
-              variants={timelineItemVariants}
+              variants={mobileScrollReveal}
+              initial="hidden"
+              {...(index < 2 
+                ? { animate: "visible" }
+                : { 
+                    whileInView: "visible",
+                    viewport: { once: true, amount: 0.5 }
+                  }
+              )}
               className="ml-12 sm:ml-16 flex-1 min-w-0"
             >
+              <motion.div {...touchFeedback} className="h-full">
               <Card 
                 className={`group cursor-pointer transition-all duration-300 hover:shadow-lg hover:border-primary/60 hover:shadow-primary/10 relative overflow-hidden ${
                   expandedItem === entry.id ? 'shadow-lg border-primary/50' : ''
@@ -211,6 +220,7 @@ export function AnimatedTimeline({ entries }: AnimatedTimelineProps) {
                   </motion.div>
                 </CardContent>
               </Card>
+              </motion.div>
             </motion.div>
           </motion.div>
         ))}

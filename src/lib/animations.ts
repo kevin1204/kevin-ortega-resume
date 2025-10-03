@@ -314,3 +314,70 @@ export const pageTransitionVariants: Variants = {
     transition: { duration: 0.4, ease: "easeIn" }
   }
 };
+
+// Mobile-specific animations
+export const mobileTapVariants: Variants = {
+  rest: { scale: 1 },
+  tap: { 
+    scale: 0.96,
+    transition: { duration: 0.15, ease: "easeOut" }
+  }
+};
+
+export const mobileCardVariants: Variants = {
+  hidden: { opacity: 0, y: 30, scale: 0.95 },
+  visible: { 
+    opacity: 1, 
+    y: 0, 
+    scale: 1,
+    transition: { duration: 0.4, ease: "easeOut" }
+  }
+};
+
+export const mobileStaggerVariants: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+      delayChildren: 0.1
+    }
+  }
+};
+
+export const mobileStaggerItem: Variants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { 
+    opacity: 1, 
+    y: 0,
+    transition: { duration: 0.3, ease: "easeOut" }
+  }
+};
+
+// Mobile scroll animations
+export const mobileScrollReveal: Variants = {
+  hidden: { opacity: 0, y: 50 },
+  visible: { 
+    opacity: 1, 
+    y: 0,
+    transition: { duration: 0.5, ease: "easeOut" }
+  }
+};
+
+// Touch feedback animations
+export const touchFeedback = {
+  whileTap: { 
+    scale: 0.96,
+    transition: { duration: 0.1, ease: [0.4, 0.0, 0.2, 1] }
+  }
+};
+
+// Mobile-optimized hover (for devices that support hover)
+export const mobileHoverVariants: Variants = {
+  rest: { scale: 1, y: 0 },
+  hover: { 
+    scale: 1.02, 
+    y: -2,
+    transition: { duration: 0.2, ease: "easeOut" }
+  }
+};

@@ -11,7 +11,9 @@ import {
   scrollRevealVariants, 
   gridStaggerVariants, 
   gridItemVariants,
-  buttonHoverVariants
+  buttonHoverVariants,
+  mobileScrollReveal,
+  touchFeedback
 } from '@/lib/animations';
 import { LoadingGrid } from '@/components/loading';
 
@@ -53,16 +55,26 @@ export function CertificationsGrid({ certifications }: CertificationsGridProps) 
           animate="visible"
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
         >
-          {certifications.map((certification) => (
+          {certifications.map((certification, index) => (
           <motion.div key={certification.id} variants={gridItemVariants}>
-            <Card className="group h-full transition-all duration-300 hover:shadow-lg hover:border-primary/60 hover:shadow-primary/10 relative overflow-hidden">
-              {/* Running line outline effect */}
-              <div className="absolute inset-0 rounded-lg border-2 border-transparent group-hover:border-primary/30 transition-all duration-500 group-hover:animate-pulse"></div>
-              <div className="absolute inset-0 rounded-lg border border-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-              <CardContent className="p-6 h-full flex flex-col relative z-10">
+            <motion.div
+              variants={mobileScrollReveal}
+              initial="hidden"
+              {...(index < 3 
+                ? { animate: "visible" }
+                : { 
+                    whileInView: "visible",
+                    viewport: { once: true, amount: 0.5 }
+                  }
+              )}
+              className="h-full"
+            >
+              <motion.div {...touchFeedback} className="h-full">
+                <Card className="group h-full transition-all duration-300 hover:shadow-lg">
+              <CardContent className="p-6 h-full flex flex-col">
                 <div className="flex items-start justify-between mb-4">
                   <div className="flex-1">
-                    <h3 className="text-lg font-semibold mb-2 line-clamp-2 group-hover:text-primary transition-colors duration-300">
+                    <h3 className="text-lg font-semibold mb-2 line-clamp-2">
                       {certification.name}
                     </h3>
                     <p className="text-sm text-muted-foreground mb-2">
@@ -101,6 +113,8 @@ export function CertificationsGrid({ certifications }: CertificationsGridProps) 
                 </div>
               </CardContent>
             </Card>
+              </motion.div>
+            </motion.div>
           </motion.div>
         ))}
         </motion.div>
