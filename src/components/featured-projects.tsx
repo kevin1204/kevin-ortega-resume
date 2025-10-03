@@ -48,18 +48,40 @@ export function FeaturedProjects({ projects }: FeaturedProjectsProps) {
           </motion.p>
         </motion.div>
 
-        <motion.div
-          variants={gridStaggerVariants}
-          initial="hidden"
-          animate="visible"
-          className="grid grid-cols-1 gap-8 lg:grid-cols-2"
-        >
-          {featuredProjects.map((project) => (
-            <motion.div key={project.id} variants={gridItemVariants}>
+        <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
+          {featuredProjects.map((project, index) => (
+            <motion.div 
+              key={project.id}
+              initial={{ opacity: 0, y: 50, scale: 0.95 }}
+              whileInView={{ 
+                opacity: 1, 
+                y: 0, 
+                scale: 1,
+                transition: { 
+                  duration: 0.6, 
+                  delay: index * 0.2,
+                  ease: "easeOut"
+                }
+              }}
+              viewport={{ once: true, amount: 0.3 }}
+            >
               <MagneticCard className="h-full" intensity={0.15}>
                 <Card className="group overflow-hidden border-0 glass hover:shadow-2xl transition-all duration-500 hover:border-primary/20 h-full">
                   <CardContent className="p-0 h-full flex flex-col">
-                    <div className="relative overflow-hidden flex-1">
+                    <motion.div 
+                      className="relative overflow-hidden flex-1"
+                      initial={{ opacity: 0, scale: 1.1 }}
+                      whileInView={{ 
+                        opacity: 1, 
+                        scale: 1,
+                        transition: { 
+                          duration: 0.8, 
+                          delay: index * 0.2 + 0.1,
+                          ease: "easeOut"
+                        }
+                      }}
+                      viewport={{ once: true, amount: 0.3 }}
+                    >
                       <Image
                         src={project.cover}
                         alt={project.title}
@@ -88,9 +110,22 @@ export function FeaturedProjects({ projects }: FeaturedProjectsProps) {
                           )}
                         </div>
                       </div>
-                    </div>
+                    </motion.div>
                     
-                    <div className="p-6">
+                    <motion.div 
+                      className="p-6"
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ 
+                        opacity: 1, 
+                        y: 0,
+                        transition: { 
+                          duration: 0.6, 
+                          delay: index * 0.2 + 0.2,
+                          ease: "easeOut"
+                        }
+                      }}
+                      viewport={{ once: true, amount: 0.3 }}
+                    >
                       <div className="flex items-start justify-between mb-3">
                         <div className="flex-1">
                           <div className="flex items-center gap-2 mb-2">
@@ -126,13 +161,13 @@ export function FeaturedProjects({ projects }: FeaturedProjectsProps) {
                           <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover/link:translate-x-1" />
                         </Link>
                       </Button>
-                    </div>
+                    </motion.div>
                   </CardContent>
                 </Card>
               </MagneticCard>
             </motion.div>
           ))}
-        </motion.div>
+        </div>
 
         <motion.div
           variants={scrollRevealVariants}
