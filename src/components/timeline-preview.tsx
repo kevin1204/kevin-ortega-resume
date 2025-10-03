@@ -7,7 +7,8 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Calendar, MapPin, Building, ArrowRight, GraduationCap, Briefcase } from 'lucide-react';
 import Link from 'next/link';
 import type { TimelineEntry } from '@/lib/types';
-import { fadeInUp, staggerContainer, staggerItem } from '@/lib/animations';
+import { staggerContainer, staggerItem, scrollRevealVariants } from '@/lib/animations';
+import { MagneticCard } from '@/components/magnetic-card';
 
 interface TimelinePreviewProps {
   entries: TimelineEntry[];
@@ -98,44 +99,57 @@ export function TimelinePreview({ entries }: TimelinePreviewProps) {
                 </div>
 
                 {/* Content */}
-                <Card className="flex-1 group hover:shadow-lg transition-all duration-300">
-                  <CardContent className="p-6">
-                    <div className="flex items-start justify-between mb-4">
-                      <div className="flex-1">
-                        <div className="flex items-center gap-2 mb-2">
-                          <Badge variant={entry.type === 'education' ? 'default' : 'secondary'}>
-                            {entry.type === 'education' ? 'Education' : 'Experience'}
-                          </Badge>
-                          <Badge variant="outline" className="text-xs">
-                            {entry.tags?.[0]}
-                          </Badge>
-                        </div>
-                        
-                        <h3 className="text-xl font-semibold mb-2">{entry.title}</h3>
-                        
-                        <div className="flex items-center gap-4 text-sm text-muted-foreground mb-2">
-                          <div className="flex items-center gap-1">
-                            <Building className="h-4 w-4" />
-                            <span>{entry.organization}</span>
+                <MagneticCard className="flex-1" intensity={0.1}>
+                  <Card className="group glass hover:shadow-2xl transition-all duration-500 border-border/30 hover:border-primary/20 bg-card/80">
+                    <CardContent className="p-6">
+                      <div className="flex items-start justify-between mb-4">
+                        <div className="flex-1">
+                          <div className="flex items-center justify-between mb-3">
+                            <Badge 
+                              variant="outline"
+                              className="text-xs font-medium px-2 py-1 flex items-center gap-2 text-[#1F5D96] border-[#1F5D96] bg-transparent hover:bg-[#1F5D96]/10"
+                            >
+                              {getTypeIcon(entry.type)}
+                              {entry.type === 'education' ? 'EDUCATION' : 'EXPERIENCE'}
+                            </Badge>
+                            {entry.tags && entry.tags.length > 0 && (
+                              <div className="flex gap-2">
+                                {entry.tags.slice(0, 2).map((tag) => (
+                                  <Badge key={tag} variant="outline" className="text-xs px-2 py-1">
+                                    {tag}
+                                  </Badge>
+                                ))}
+                              </div>
+                            )}
                           </div>
-                          <div className="flex items-center gap-1">
-                            <MapPin className="h-4 w-4" />
-                            <span>{entry.location}</span>
+                          
+                          <h3 className="text-xl font-semibold mb-3 group-hover:text-primary transition-colors duration-300">
+                            {entry.title}
+                          </h3>
+                          
+                          <div className="flex items-center gap-4 text-sm text-muted-foreground mb-3">
+                            <div className="flex items-center gap-1">
+                              <Building className="h-4 w-4" />
+                              <span>{entry.organization}</span>
+                            </div>
+                            <div className="flex items-center gap-1">
+                              <MapPin className="h-4 w-4" />
+                              <span>{entry.location}</span>
+                            </div>
+                            <div className="flex items-center gap-1">
+                              <Calendar className="h-4 w-4" />
+                              <span>{formatDate(entry.startDate, entry.endDate)}</span>
+                            </div>
                           </div>
-                        </div>
-                        
-                        <div className="flex items-center gap-1 text-sm text-muted-foreground">
-                          <Calendar className="h-4 w-4" />
-                          <span>{formatDate(entry.startDate, entry.endDate)}</span>
                         </div>
                       </div>
-                    </div>
 
-                    <p className="text-muted-foreground text-sm line-clamp-2">
-                      {entry.description[0]}
-                    </p>
-                  </CardContent>
-                </Card>
+                      <p className="text-muted-foreground text-sm leading-relaxed">
+                        {entry.description[0]}
+                      </p>
+                    </CardContent>
+                  </Card>
+                </MagneticCard>
               </div>
 
             </motion.div>
@@ -149,8 +163,8 @@ export function TimelinePreview({ entries }: TimelinePreviewProps) {
           viewport={{ once: true, margin: "-100px" }}
           className="text-center mt-12"
         >
-          <Button asChild size="lg">
-            <Link href="/timeline" className="group">
+          <Button asChild size="lg" className="group">
+            <Link href="/timeline">
               View Full Timeline
               <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
             </Link>

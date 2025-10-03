@@ -99,7 +99,7 @@
     text-wrap: balance;
   }
   .glass {
-    @apply bg-background/80 backdrop-blur-sm border border-border/50;
+    @apply bg-card/60 backdrop-blur-md border border-border/30 shadow-sm;
   }
   .gradient-text {
     @apply bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent;

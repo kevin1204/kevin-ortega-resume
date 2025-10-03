@@ -14,12 +14,15 @@ import {
   gridItemVariants,
   buttonHoverVariants
 } from '@/lib/animations';
+import { MagneticCard } from '@/components/magnetic-card';
 
 interface FeaturedProjectsProps {
   projects: Project[];
 }
 
 export function FeaturedProjects({ projects }: FeaturedProjectsProps) {
+  const featuredProjects = projects.filter(project => project.featured);
+  
   return (
     <section className="py-24">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
@@ -34,7 +37,7 @@ export function FeaturedProjects({ projects }: FeaturedProjectsProps) {
             variants={scrollRevealVariants}
             className="text-3xl font-bold font-display sm:text-4xl lg:text-5xl mb-4"
           >
-            Featured Projects
+            Featured <span className="gradient-text">Projects</span>
           </motion.h2>
           <motion.p
             variants={scrollRevealVariants}
@@ -51,70 +54,82 @@ export function FeaturedProjects({ projects }: FeaturedProjectsProps) {
           animate="visible"
           className="grid grid-cols-1 gap-8 lg:grid-cols-2"
         >
-          {projects.map((project) => (
+          {featuredProjects.map((project) => (
             <motion.div key={project.id} variants={gridItemVariants}>
-              <Card className="group overflow-hidden border-0 bg-card/50 backdrop-blur-sm hover:bg-card/80 transition-all duration-500 hover:shadow-2xl">
-                <CardContent className="p-0">
-                  <div className="relative overflow-hidden">
-                    <Image
-                      src={project.cover}
-                      alt={project.title}
-                      width={600}
-                      height={400}
-                      className="w-full h-64 object-cover transition-transform duration-700 group-hover:scale-110"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                    <div className="absolute bottom-4 left-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                      <div className="flex gap-2">
-                        {project.links.live && (
-                          <Button size="sm" asChild>
-                            <Link href={project.links.live} target="_blank" rel="noopener noreferrer">
-                              <ExternalLink className="mr-2 h-3 w-3" />
-                              Live Site
-                            </Link>
-                          </Button>
-                        )}
-                        {project.links.github && (
-                          <Button size="sm" variant="outline" asChild>
-                            <Link href={project.links.github} target="_blank" rel="noopener noreferrer">
-                              <ExternalLink className="mr-2 h-3 w-3" />
-                              Code
-                            </Link>
-                          </Button>
-                        )}
-                      </div>
-                    </div>
-                  </div>
-                  
-                  <div className="p-6">
-                    <div className="flex items-start justify-between mb-3">
-                      <div>
-                        <h3 className="text-xl font-semibold mb-1 group-hover:text-primary transition-colors duration-300">{project.title}</h3>
-                        <p className="text-sm text-muted-foreground">{project.role}</p>
+              <MagneticCard className="h-full" intensity={0.15}>
+                <Card className="group overflow-hidden border-0 glass hover:shadow-2xl transition-all duration-500 hover:border-primary/20 h-full">
+                  <CardContent className="p-0 h-full flex flex-col">
+                    <div className="relative overflow-hidden flex-1">
+                      <Image
+                        src={project.cover}
+                        alt={project.title}
+                        width={600}
+                        height={400}
+                        className="w-full h-64 object-cover transition-transform duration-700 group-hover:scale-110"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                      <div className="absolute bottom-4 left-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <div className="flex gap-2">
+                          {project.links.live && (
+                            <Button size="sm" asChild>
+                              <Link href={project.links.live} target="_blank" rel="noopener noreferrer">
+                                <ExternalLink className="mr-2 h-3 w-3" />
+                                Live Site
+                              </Link>
+                            </Button>
+                          )}
+                          {project.links.github && (
+                            <Button size="sm" variant="outline" asChild>
+                              <Link href={project.links.github} target="_blank" rel="noopener noreferrer">
+                                <ExternalLink className="mr-2 h-3 w-3" />
+                                Code
+                              </Link>
+                            </Button>
+                          )}
+                        </div>
                       </div>
                     </div>
                     
-                    <p className="text-muted-foreground mb-4 line-clamp-2">
-                      {project.summary}
-                    </p>
-                    
-                    <div className="flex flex-wrap gap-2 mb-4">
-                      {project.tags.map((tag) => (
-                        <Badge key={tag} variant="secondary" className="text-xs hover:bg-primary/10 transition-colors duration-300">
-                          {tag}
+                    <div className="p-6">
+                      <div className="flex items-start justify-between mb-3">
+                        <div className="flex-1">
+                          <div className="flex items-center gap-2 mb-2">
+                            <div className="w-2 h-2 bg-primary rounded-full"></div>
+                            <span className="text-xs text-muted-foreground uppercase tracking-wide font-medium">
+                              {project.role.toUpperCase()}
+                            </span>
+                          </div>
+                          <h3 className="text-xl font-semibold mb-1 group-hover:text-primary transition-colors duration-300">
+                            {project.title}
+                          </h3>
+                        </div>
+                        <Badge variant="default" className="text-xs font-medium">
+                          Featured
                         </Badge>
-                      ))}
+                      </div>
+                      
+                      <p className="text-muted-foreground mb-4 line-clamp-2">
+                        {project.summary}
+                      </p>
+                      
+                      <div className="flex flex-wrap gap-2 mb-4">
+                        {project.tags.map((tag) => (
+                          <Badge key={tag} variant="secondary" className="text-xs hover:bg-primary/10 transition-colors duration-300">
+                            {tag}
+                          </Badge>
+                        ))}
+                      </div>
+                      
+                      <Button asChild variant="ghost" className="group/link">
+                        <Link href={`/projects/${project.slug}`}>
+                          View Details
+                          <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover/link:translate-x-1" />
+                        </Link>
+                      </Button>
                     </div>
-                    
-                    <Button asChild variant="ghost" className="group/link">
-                      <Link href={`/projects/${project.slug}`}>
-                        View Details
-                        <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover/link:translate-x-1" />
-                      </Link>
-                    </Button>
-                  </div>
-                </CardContent>
-              </Card>
+                  </CardContent>
+                </Card>
+              </MagneticCard>
             </motion.div>
           ))}
         </motion.div>
@@ -126,10 +141,10 @@ export function FeaturedProjects({ projects }: FeaturedProjectsProps) {
           viewport={{ once: true, margin: "-100px" }}
           className="text-center mt-12"
         >
-          <Button asChild size="lg">
+          <Button asChild size="lg" className="group">
             <Link href="/projects">
               View All Projects
-              <ArrowRight className="ml-2 h-4 w-4" />
+              <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
             </Link>
           </Button>
         </motion.div>
