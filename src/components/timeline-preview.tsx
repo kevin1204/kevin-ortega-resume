@@ -42,9 +42,9 @@ export function TimelinePreview({ entries }: TimelinePreviewProps) {
 
   const getTypeIcon = (type: string) => {
     return type === 'education' ? (
-      <GraduationCap className="h-4 w-4" />
+      <GraduationCap className="h-3 w-3 sm:h-4 sm:w-4" />
     ) : (
-      <Briefcase className="h-4 w-4" />
+      <Briefcase className="h-3 w-3 sm:h-4 sm:w-4" />
     );
   };
 
@@ -53,8 +53,8 @@ export function TimelinePreview({ entries }: TimelinePreviewProps) {
   };
 
   return (
-    <section className="py-24 bg-muted/30">
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
+    <section className="py-12 sm:py-24 bg-muted/30">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <motion.div
           variants={staggerContainer}
           initial="hidden"
@@ -82,7 +82,7 @@ export function TimelinePreview({ entries }: TimelinePreviewProps) {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
-          className="space-y-6"
+          className="space-y-4 sm:space-y-6 max-w-5xl mx-auto"
         >
           {recentEntries.map((entry, index) => (
             <motion.div
@@ -90,30 +90,36 @@ export function TimelinePreview({ entries }: TimelinePreviewProps) {
               variants={staggerItem}
               className="relative"
             >
-              <div className="flex items-start gap-6">
+              <div className="flex items-start gap-3 sm:gap-6">
                 {/* Timeline dot */}
                 <div className="flex-shrink-0">
-                  <div className={`w-12 h-12 ${getTypeColor(entry.type)} rounded-full flex items-center justify-center text-white shadow-lg`}>
-                    {getTypeIcon(entry.type)}
+                  <div className={`w-8 h-8 sm:w-12 sm:h-12 ${getTypeColor(entry.type)} rounded-full flex items-center justify-center text-white shadow-lg`}>
+                    {entry.type === 'education' ? (
+                      <GraduationCap className="h-4 w-4 sm:h-6 sm:w-6" />
+                    ) : (
+                      <Briefcase className="h-4 w-4 sm:h-6 sm:w-6" />
+                    )}
                   </div>
                 </div>
 
                 {/* Content */}
-                <MagneticCard className="flex-1" intensity={0.1}>
+                <MagneticCard className="flex-1 min-w-0" intensity={0.1}>
                   <Card className="group glass hover:shadow-2xl transition-all duration-500 border-border/30 hover:border-primary/20 bg-card/80">
-                    <CardContent className="p-6">
+                    <CardContent className="p-4 sm:p-6">
                       <div className="flex items-start justify-between mb-4">
                         <div className="flex-1">
-                          <div className="flex items-center justify-between mb-3">
+                          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-3">
                             <Badge 
                               variant="outline"
-                              className="text-xs font-medium px-2 py-1 flex items-center gap-2 text-[#1F5D96] border-[#1F5D96] bg-transparent hover:bg-[#1F5D96]/10"
+                              className="text-xs font-medium px-2 py-1 flex items-center gap-2 text-[#1F5D96] border-[#1F5D96] bg-transparent hover:bg-[#1F5D96]/10 w-fit"
                             >
-                              {getTypeIcon(entry.type)}
+                              <div className="w-3 h-3 sm:w-4 sm:h-4 flex items-center justify-center">
+                                {getTypeIcon(entry.type)}
+                              </div>
                               {entry.type === 'education' ? 'EDUCATION' : 'EXPERIENCE'}
                             </Badge>
                             {entry.tags && entry.tags.length > 0 && (
-                              <div className="flex gap-2">
+                              <div className="flex flex-wrap gap-1 sm:gap-2">
                                 {entry.tags.slice(0, 2).map((tag) => (
                                   <Badge key={tag} variant="outline" className="text-xs px-2 py-1">
                                     {tag}
@@ -123,28 +129,28 @@ export function TimelinePreview({ entries }: TimelinePreviewProps) {
                             )}
                           </div>
                           
-                          <h3 className="text-xl font-semibold mb-3 group-hover:text-primary transition-colors duration-300">
+                          <h3 className="text-lg sm:text-xl font-semibold mb-3 group-hover:text-primary transition-colors duration-300 break-words">
                             {entry.title}
                           </h3>
                           
-                          <div className="flex items-center gap-4 text-sm text-muted-foreground mb-3">
+                          <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 text-sm text-muted-foreground mb-3">
                             <div className="flex items-center gap-1">
-                              <Building className="h-4 w-4" />
-                              <span>{entry.organization}</span>
+                              <Building className="h-4 w-4 flex-shrink-0" />
+                              <span className="truncate">{entry.organization}</span>
                             </div>
                             <div className="flex items-center gap-1">
-                              <MapPin className="h-4 w-4" />
-                              <span>{entry.location}</span>
+                              <MapPin className="h-4 w-4 flex-shrink-0" />
+                              <span className="truncate">{entry.location}</span>
                             </div>
                             <div className="flex items-center gap-1">
-                              <Calendar className="h-4 w-4" />
-                              <span>{formatDate(entry.startDate, entry.endDate)}</span>
+                              <Calendar className="h-4 w-4 flex-shrink-0" />
+                              <span className="truncate">{formatDate(entry.startDate, entry.endDate)}</span>
                             </div>
                           </div>
                         </div>
                       </div>
 
-                      <p className="text-muted-foreground text-sm leading-relaxed">
+                      <p className="text-muted-foreground text-sm leading-relaxed break-words">
                         {entry.description[0]}
                       </p>
                     </CardContent>
