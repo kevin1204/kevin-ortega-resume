@@ -22,8 +22,11 @@ export function ProjectCard({ project }: ProjectCardProps) {
   return (
     <motion.div variants={gridItemVariants} className="h-full">
       <MagneticCard className="h-full" intensity={0.1}>
-        <Card className="h-full overflow-hidden glass hover:shadow-2xl transition-all duration-500 hover:border-primary/20 border-border/50">
-          <CardContent className="p-0 h-full flex flex-col">
+        <Card className="group h-full overflow-hidden glass hover:shadow-2xl transition-all duration-500 hover:border-primary/60 hover:shadow-primary/10 border-border/50 relative">
+          {/* Running line outline effect */}
+          <div className="absolute inset-0 rounded-lg border-2 border-transparent group-hover:border-primary/30 transition-all duration-500 group-hover:animate-pulse z-10"></div>
+          <div className="absolute inset-0 rounded-lg border border-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10"></div>
+          <CardContent className="p-0 h-full flex flex-col relative z-20">
             <div className="relative overflow-hidden flex-1">
               <motion.div
                 variants={loadingVariants}

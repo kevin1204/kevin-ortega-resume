@@ -118,12 +118,15 @@ export function AnimatedTimeline({ entries }: AnimatedTimelineProps) {
               className="ml-12 sm:ml-16 flex-1 min-w-0"
             >
               <Card 
-                className={`group cursor-pointer transition-all duration-300 hover:shadow-lg ${
+                className={`group cursor-pointer transition-all duration-300 hover:shadow-lg hover:border-primary/60 hover:shadow-primary/10 relative overflow-hidden ${
                   expandedItem === entry.id ? 'shadow-lg border-primary/50' : ''
                 }`}
                 onClick={() => setExpandedItem(expandedItem === entry.id ? null : entry.id)}
               >
-                <CardContent className="p-4 sm:p-6">
+                {/* Running line outline effect */}
+                <div className="absolute inset-0 rounded-lg border-2 border-transparent group-hover:border-primary/30 transition-all duration-500 group-hover:animate-pulse"></div>
+                <div className="absolute inset-0 rounded-lg border border-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <CardContent className="pt-1 pb-2 px-4 sm:pt-1.5 sm:pb-3 sm:px-6 relative z-10">
                   <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between mb-4 gap-4">
                     <div className="flex-1 min-w-0">
                       <div className="flex flex-wrap items-center gap-2 mb-2">
@@ -140,7 +143,7 @@ export function AnimatedTimeline({ entries }: AnimatedTimelineProps) {
                         ))}
                       </div>
                       
-                      <h3 className="text-lg sm:text-xl font-semibold mb-1 break-words">{entry.title}</h3>
+                      <h3 className="text-lg sm:text-xl font-semibold mb-1 break-words group-hover:text-primary transition-colors duration-300">{entry.title}</h3>
                       <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 text-sm text-muted-foreground mb-2">
                         <div className="flex items-center gap-1 min-w-0">
                           <Building className="h-4 w-4 flex-shrink-0" />
