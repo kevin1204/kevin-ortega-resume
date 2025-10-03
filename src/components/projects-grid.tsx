@@ -13,7 +13,9 @@ import {
   scrollRevealVariants, 
   gridStaggerVariants, 
   gridItemVariants,
-  buttonHoverVariants
+  buttonHoverVariants,
+  mobileScrollReveal,
+  touchFeedback
 } from '@/lib/animations';
 import { LoadingGrid } from '@/components/loading';
 
@@ -44,9 +46,22 @@ export function ProjectsGrid({ projects }: ProjectsGridProps) {
           animate="visible"
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
         >
-          {projects.map((project) => (
+          {projects.map((project, index) => (
           <motion.div key={project.id} variants={gridItemVariants}>
-            <Card className="group h-full overflow-hidden transition-all duration-300 hover:shadow-lg">
+            <motion.div
+              variants={mobileScrollReveal}
+              initial="hidden"
+              {...(index < 3 
+                ? { animate: "visible" }
+                : { 
+                    whileInView: "visible",
+                    viewport: { once: true, amount: 0.5 }
+                  }
+              )}
+              className="h-full"
+            >
+              <motion.div {...touchFeedback} className="h-full">
+                <Card className="group h-full overflow-hidden transition-all duration-300 hover:shadow-lg">
               <CardContent className="p-0">
                 <div className="relative overflow-hidden">
                   <Image
@@ -113,6 +128,8 @@ export function ProjectsGrid({ projects }: ProjectsGridProps) {
                 </div>
               </CardContent>
             </Card>
+              </motion.div>
+            </motion.div>
           </motion.div>
         ))}
         </motion.div>

@@ -1,10 +1,11 @@
 'use client';
 
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
-import { Calendar, MapPin, Building, ArrowRight, GraduationCap, Briefcase } from 'lucide-react';
+import { Calendar, MapPin, Building, ArrowRight, GraduationCap, Briefcase, ChevronDown, ChevronUp } from 'lucide-react';
 import Link from 'next/link';
 import type { TimelineEntry } from '@/lib/types';
 import { staggerContainer, staggerItem, scrollRevealVariants } from '@/lib/animations';
@@ -15,6 +16,8 @@ interface TimelinePreviewProps {
 }
 
 export function TimelinePreview({ entries }: TimelinePreviewProps) {
+  const [expandedItem, setExpandedItem] = useState<string | null>(null);
+  
   // Get the 4 most recent entries (2 experience, 2 education)
   const recentEntries = entries
     .sort((a, b) => new Date(b.startDate).getTime() - new Date(a.startDate).getTime())
@@ -104,8 +107,27 @@ export function TimelinePreview({ entries }: TimelinePreviewProps) {
 
                 {/* Content */}
                 <MagneticCard className="flex-1 min-w-0" intensity={0.1}>
-                  <Card className="group glass hover:shadow-2xl transition-all duration-500 border-border/30 hover:border-primary/20 bg-card/80">
-                    <CardContent className="pt-1 pb-4 px-4 sm:pt-1 sm:pb-6 sm:px-6">
+                  <Card 
+                    className={`group glass hover:shadow-2xl transition-all duration-500 bg-card/80 cursor-pointer relative overflow-hidden ${
+                      expandedItem === entry.id 
+                        ? 'shadow-lg !border-primary/50' 
+                        : '!border-border/30 hover:!border-primary/20'
+                    }`}
+                    onClick={() => setExpandedItem(expandedItem === entry.id ? null : entry.id)}
+                  >
+                    {/* Running line outline effect */}
+                    <div className={`absolute inset-0 rounded-lg border-2 border-transparent transition-all duration-500 z-10 ${
+                      expandedItem === entry.id 
+                        ? 'border-primary/30 animate-pulse' 
+                        : 'group-hover:border-primary/30 group-hover:animate-pulse'
+                    }`}></div>
+                    <div className={`absolute inset-0 rounded-lg border border-primary/20 transition-opacity duration-300 z-10 ${
+                      expandedItem === entry.id 
+                        ? 'opacity-100' 
+                        : 'opacity-0 group-hover:opacity-100'
+                    }`}></div>
+                    
+                    <CardContent className="pt-1 pb-4 px-4 sm:pt-1 sm:pb-6 sm:px-6 relative z-20">
                       <div className="flex items-start justify-between mb-4">
                         <div className="flex-1">
                           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-3">
@@ -148,11 +170,61 @@ export function TimelinePreview({ entries }: TimelinePreviewProps) {
                             </div>
                           </div>
                         </div>
+                        
+                        {/* Expand/Collapse button */}
+                        <button 
+                          className="flex-shrink-0 p-1 hover:bg-muted/50 rounded-full transition-colors duration-200"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            setExpandedItem(expandedItem === entry.id ? null : entry.id);
+                          }}
+                        >
+                          {expandedItem === entry.id ? (
+                            <ChevronUp className="h-4 w-4 text-muted-foreground" />
+                          ) : (
+                            <ChevronDown className="h-4 w-4 text-muted-foreground" />
+                          )}
+                        </button>
                       </div>
 
                       <p className="text-muted-foreground text-sm leading-relaxed break-words">
                         {entry.description[0]}
                       </p>
+
+                      {/* Expanded content */}
+                      <motion.div
+                        initial={false}
+                        animate={{
+                          height: expandedItem === entry.id ? 'auto' : 0,
+                          opacity: expandedItem === entry.id ? 1 : 0
+                        }}
+                        transition={{ 
+                          duration: 0.4, 
+                          ease: [0.4, 0.0, 0.2, 1],
+                          opacity: { duration: 0.3 }
+                        }}
+                        className="overflow-hidden"
+                      >
+                        <div className="mt-4 pt-4 border-t border-border/20">
+                          <div className="space-y-3">
+                            {entry.description.slice(1).map((desc, index) => (
+                              <p key={index} className="text-muted-foreground text-sm leading-relaxed break-words">
+                                {desc}
+                              </p>
+                            ))}
+                            
+                            {entry.tags && entry.tags.length > 2 && (
+                              <div className="flex flex-wrap gap-2 mt-4">
+                                {entry.tags.slice(2).map((tag) => (
+                                  <Badge key={tag} variant="outline" className="text-xs px-2 py-1">
+                                    {tag}
+                                  </Badge>
+                                ))}
+                              </div>
+                            )}
+                          </div>
+                        </div>
+                      </motion.div>
                     </CardContent>
                   </Card>
                 </MagneticCard>

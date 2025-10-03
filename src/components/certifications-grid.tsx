@@ -11,7 +11,9 @@ import {
   scrollRevealVariants, 
   gridStaggerVariants, 
   gridItemVariants,
-  buttonHoverVariants
+  buttonHoverVariants,
+  mobileScrollReveal,
+  touchFeedback
 } from '@/lib/animations';
 import { LoadingGrid } from '@/components/loading';
 
@@ -53,9 +55,22 @@ export function CertificationsGrid({ certifications }: CertificationsGridProps) 
           animate="visible"
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
         >
-          {certifications.map((certification) => (
+          {certifications.map((certification, index) => (
           <motion.div key={certification.id} variants={gridItemVariants}>
-            <Card className="group h-full transition-all duration-300 hover:shadow-lg">
+            <motion.div
+              variants={mobileScrollReveal}
+              initial="hidden"
+              {...(index < 3 
+                ? { animate: "visible" }
+                : { 
+                    whileInView: "visible",
+                    viewport: { once: true, amount: 0.5 }
+                  }
+              )}
+              className="h-full"
+            >
+              <motion.div {...touchFeedback} className="h-full">
+                <Card className="group h-full transition-all duration-300 hover:shadow-lg">
               <CardContent className="p-6 h-full flex flex-col">
                 <div className="flex items-start justify-between mb-4">
                   <div className="flex-1">
@@ -98,6 +113,8 @@ export function CertificationsGrid({ certifications }: CertificationsGridProps) 
                 </div>
               </CardContent>
             </Card>
+              </motion.div>
+            </motion.div>
           </motion.div>
         ))}
         </motion.div>

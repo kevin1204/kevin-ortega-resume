@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { Badge } from '@/components/ui/badge';
-import { fadeInUp, staggerContainer, staggerItem } from '@/lib/animations';
+import { fadeInUp, staggerContainer, staggerItem, mobileScrollReveal, touchFeedback } from '@/lib/animations';
 
 const skills = [
   // Frontend
@@ -48,12 +48,25 @@ export function Skills() {
           viewport={{ once: true, margin: "-100px" }}
           className="grid grid-cols-1 gap-8 md:grid-cols-2"
         >
-          {skills.map((skillGroup) => (
+          {skills.map((skillGroup, index) => (
             <motion.div key={skillGroup.category} variants={staggerItem}>
               <motion.div
-                variants={fadeInUp}
-                className="bg-card/50 backdrop-blur-sm rounded-2xl p-6 border border-border/50"
+                variants={mobileScrollReveal}
+                initial="hidden"
+                {...(index < 2 
+                  ? { animate: "visible" }
+                  : { 
+                      whileInView: "visible",
+                      viewport: { once: true, amount: 0.5 }
+                    }
+                )}
+                className="h-full"
               >
+                <motion.div {...touchFeedback} className="h-full">
+                  <motion.div
+                    variants={fadeInUp}
+                    className="bg-card/50 backdrop-blur-sm rounded-2xl p-6 border border-border/50"
+                  >
                 <h3 className="text-xl font-semibold mb-4 text-center">
                   {skillGroup.category}
                 </h3>
@@ -68,6 +81,8 @@ export function Skills() {
                     </Badge>
                   ))}
                 </div>
+                  </motion.div>
+                </motion.div>
               </motion.div>
             </motion.div>
           ))}
