@@ -45,8 +45,21 @@ export function AboutHero({ siteConfig }: AboutHeroProps) {
               </h1>
             </motion.div>
             
-            <motion.div variants={fadeInUp} className="space-y-4 text-lg text-muted-foreground">
-              <p>
+            <div className="space-y-4 text-lg text-muted-foreground">
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ 
+                  opacity: 1, 
+                  y: 0,
+                  transition: { 
+                    duration: 0.6, 
+                    delay: 0.1,
+                    ease: "easeOut"
+                  }
+                }}
+                viewport={{ once: true, amount: 0.3 }}
+                className="block"
+              >
                 I&apos;m a Full Stack Developer and Solutions Architect based in {siteConfig.links.location}. 
                 As the Founder & CEO of{' '}
                 <Link 
@@ -59,33 +72,82 @@ export function AboutHero({ siteConfig }: AboutHeroProps) {
                 </Link>
                 , I architect comprehensive digital solutions 
                 that drive business growth and operational efficiency.
-              </p>
+              </motion.p>
               
-              <p>
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ 
+                  opacity: 1, 
+                  y: 0,
+                  transition: { 
+                    duration: 0.6, 
+                    delay: 0.2,
+                    ease: "easeOut"
+                  }
+                }}
+                viewport={{ once: true, amount: 0.3 }}
+                className="block"
+              >
                 With extensive experience as a Technical Account Manager and Technical Support Specialist, 
                 I bring a unique blend of technical expertise and client relationship management. 
                 I understand both the technical challenges and business objectives, enabling me to 
                 design solutions that truly solve real-world problems.
-              </p>
+              </motion.p>
               
-              <p>
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ 
+                  opacity: 1, 
+                  y: 0,
+                  transition: { 
+                    duration: 0.6, 
+                    delay: 0.3,
+                    ease: "easeOut"
+                  }
+                }}
+                viewport={{ once: true, amount: 0.3 }}
+                className="block"
+              >
                 My background spans from hands-on technical support to leading enterprise client portfolios, 
                 giving me deep insights into system architecture, scalability, and user experience. 
                 I specialize in creating end-to-end solutions that not only meet technical requirements 
                 but also deliver measurable business value and exceptional user experiences.
-              </p>
+              </motion.p>
               
-              <p>
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ 
+                  opacity: 1, 
+                  y: 0,
+                  transition: { 
+                    duration: 0.6, 
+                    delay: 0.4,
+                    ease: "easeOut"
+                  }
+                }}
+                viewport={{ once: true, amount: 0.3 }}
+                className="block"
+              >
                 I&apos;m passionate about AI and artificial intelligence, always exploring new AI tools and 
                 technologies to discover how they can make our lives more efficient and productive. 
                 I believe in the transformative power of AI to solve complex problems and enhance 
                 human capabilities, and I&apos;m constantly experimenting with the latest AI innovations 
                 to stay at the forefront of technological advancement.
-              </p>
-            </motion.div>
+              </motion.p>
+            </div>
             
             <motion.div 
-              variants={fadeInUp}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ 
+                opacity: 1, 
+                y: 0,
+                transition: { 
+                  duration: 0.6, 
+                  delay: 0.5,
+                  ease: "easeOut"
+                }
+              }}
+              viewport={{ once: true, amount: 0.3 }}
               className="pt-6 border-t border-border"
             >
               <div className="grid grid-cols-2 gap-6">
