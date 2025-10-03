@@ -1,7 +1,7 @@
 'use client';
 
 import { motion, useInView } from 'framer-motion';
-import { useRef, useState, useMemo } from 'react';
+import { useRef, useState, useMemo, useEffect } from 'react';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
@@ -18,7 +18,10 @@ type TimelineFilter = 'all' | 'education' | 'experience';
 export function AnimatedTimeline({ entries }: AnimatedTimelineProps) {
   const [expandedItem, setExpandedItem] = useState<string | null>(null);
   const [activeFilter, setActiveFilter] = useState<TimelineFilter>('all');
+  const [progressHeight, setProgressHeight] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
   const ref = useRef(null);
+  const timelineRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   // Sort entries by start date (newest first) and filter
@@ -36,6 +39,73 @@ export function AnimatedTimeline({ entries }: AnimatedTimelineProps) {
       return dateB.getTime() - dateA.getTime();
     });
   }, [entries, activeFilter]);
+
+  // Mobile detection and scroll progress effect
+  useEffect(() => {
+    const checkMobile = () => {
+      const mobile = window.innerWidth <= 768;
+      setIsMobile(mobile);
+      if (!mobile) {
+        setProgressHeight(0); // Reset progress on desktop
+      }
+    };
+
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  // Scroll progress effect (mobile only)
+  useEffect(() => {
+    if (!isMobile || !timelineRef.current) return;
+
+    let animationFrame: number;
+    
+    const updateProgress = () => {
+      if (!timelineRef.current) return;
+      
+      const rect = timelineRef.current.getBoundingClientRect();
+      const windowHeight = window.innerHeight;
+      
+      // Calculate progress based on how much of the timeline is visible
+      const timelineTop = rect.top;
+      const timelineBottom = rect.bottom;
+      const timelineHeight = rect.height;
+      
+      let progress = 0;
+      
+      if (timelineTop <= windowHeight && timelineBottom >= 0) {
+        // Timeline is in viewport
+        const visibleTop = Math.max(0, -timelineTop);
+        const visibleBottom = Math.min(timelineHeight, windowHeight - timelineTop);
+        const visibleHeight = visibleBottom - visibleTop;
+        
+        progress = Math.min(1, visibleHeight / timelineHeight);
+      }
+      
+      setProgressHeight(progress * 100);
+      
+      animationFrame = requestAnimationFrame(updateProgress);
+    };
+
+    // Use passive scroll listener for better performance
+    const handleScroll = () => {
+      if (animationFrame) {
+        cancelAnimationFrame(animationFrame);
+      }
+      animationFrame = requestAnimationFrame(updateProgress);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    updateProgress(); // Initial calculation
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      if (animationFrame) {
+        cancelAnimationFrame(animationFrame);
+      }
+    };
+  }, [isMobile, filteredEntries]);
 
   const formatDate = (dateString: string) => {
     return new Date(dateString).toLocaleDateString('en-US', {
@@ -85,7 +155,7 @@ export function AnimatedTimeline({ entries }: AnimatedTimelineProps) {
       </div>
 
       <div ref={ref} className="relative px-4 sm:px-0">
-        {/* Timeline line */}
+        {/* Background timeline line */}
         <motion.div
           variants={timelineLineVariants}
           initial="hidden"
@@ -93,8 +163,26 @@ export function AnimatedTimeline({ entries }: AnimatedTimelineProps) {
           className="absolute left-4 sm:left-8 top-0 bottom-0 w-px bg-border/50"
           style={{ transformOrigin: 'top' }}
         />
+        
+        {/* Progress timeline line (mobile only) */}
+        {isMobile && (
+          <motion.div
+            variants={timelineLineVariants}
+            initial="hidden"
+            animate={isInView ? "visible" : "hidden"}
+            className="absolute left-4 top-0 w-px"
+            style={{ 
+              transformOrigin: 'top',
+              height: `${progressHeight}%`,
+              background: 'linear-gradient(to bottom, hsl(var(--primary)), hsl(var(--primary) / 0.8), hsl(var(--primary) / 0.6))',
+              boxShadow: '0 0 8px hsl(var(--primary) / 0.5), 0 0 16px hsl(var(--primary) / 0.3)',
+              transition: 'height 0.1s ease-out'
+            }}
+          />
+        )}
 
         <motion.div
+          ref={timelineRef}
           variants={staggerContainer}
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
@@ -109,7 +197,7 @@ export function AnimatedTimeline({ entries }: AnimatedTimelineProps) {
             {/* Timeline dot */}
             <motion.div
               variants={timelineItemVariants}
-              className="absolute left-2 sm:left-6 w-4 h-4 bg-primary rounded-full border-4 border-background shadow-lg z-10"
+              className="absolute left-4 sm:left-8 w-4 h-4 bg-primary rounded-full border-4 border-background shadow-lg z-10 transform -translate-x-1/2"
             />
 
             {/* Content */}
@@ -123,7 +211,7 @@ export function AnimatedTimeline({ entries }: AnimatedTimelineProps) {
                     viewport: { once: true, amount: 0.5 }
                   }
               )}
-              className="ml-12 sm:ml-16 flex-1 min-w-0"
+              className="ml-16 sm:ml-16 flex-1 min-w-0"
             >
               <motion.div {...touchFeedback} className="h-full">
               <Card 
