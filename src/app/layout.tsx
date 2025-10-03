@@ -28,11 +28,11 @@ export const metadata: Metadata = {
   viewport: "width=device-width, initial-scale=1, maximum-scale=1",
   icons: {
     icon: [
-      { url: "/favicon.png", sizes: "32x32", type: "image/png" },
-      { url: "/favicon.ico", sizes: "16x16", type: "image/x-icon" }
+      { url: "/favicon.png?v=2", sizes: "32x32", type: "image/png" },
+      { url: "/favicon.ico?v=2", sizes: "16x16", type: "image/x-icon" }
     ],
-    shortcut: "/favicon.png",
-    apple: "/favicon.png",
+    shortcut: "/favicon.png?v=2",
+    apple: "/favicon.png?v=2",
   },
   openGraph: {
     type: "website",
