@@ -1,6 +1,6 @@
 'use client';
 
-import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { useEffect, useState, useRef, useCallback } from 'react';
 import { starVariants, constellationLineVariants } from '@/lib/animations';
 
@@ -25,7 +25,7 @@ interface ConstellationLine {
 }
 
 interface TravelingLine {
-  id: number;
+  id: string;
   path: { x: number; y: number; id: number }[];
   currentIndex: number;
   progress: number;

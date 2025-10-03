@@ -105,7 +105,7 @@ export function TimelinePreview({ entries }: TimelinePreviewProps) {
                 {/* Content */}
                 <MagneticCard className="flex-1 min-w-0" intensity={0.1}>
                   <Card className="group glass hover:shadow-2xl transition-all duration-500 border-border/30 hover:border-primary/20 bg-card/80">
-                    <CardContent className="p-4 sm:p-6">
+                    <CardContent className="pt-1 pb-4 px-4 sm:pt-1 sm:pb-6 sm:px-6">
                       <div className="flex items-start justify-between mb-4">
                         <div className="flex-1">
                           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-3">

@@ -8,7 +8,6 @@ import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Send, Loader2 } from 'lucide-react';
 import { submitContactForm } from '@/lib/actions';
-import { LoadingSpinner } from '@/components/loading';
 
 export function ContactForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
