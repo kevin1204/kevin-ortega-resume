@@ -175,4 +175,4 @@ If you have any questions or need help customizing this portfolio:
 
 ---
 
-Built with ❤️ by Kevin Ortega Rodriguez
+Built with ❤️ by Kevin Ortega Rodriguez# Deployment trigger Fri Oct  3 14:59:13 EDT 2025
