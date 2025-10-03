@@ -234,6 +234,15 @@ export const starVariants: Variants = {
       repeat: Infinity, 
       ease: "easeInOut" 
     }
+  },
+  hover: {
+    scale: [1, 1.5, 1],
+    opacity: [1, 0.8, 1],
+    transition: { 
+      duration: 1.5, 
+      repeat: Infinity, 
+      ease: "easeInOut" 
+    }
   }
 };
 
