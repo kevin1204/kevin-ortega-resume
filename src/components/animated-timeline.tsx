@@ -45,6 +45,7 @@ export function AnimatedTimeline({ entries }: AnimatedTimelineProps) {
     const checkMobile = () => {
       const mobile = window.innerWidth <= 768;
       setIsMobile(mobile);
+      console.log('Mobile detected:', mobile, 'Width:', window.innerWidth); // Debug log
       if (!mobile) {
         setProgressHeight(0); // Reset progress on desktop
       }
@@ -59,41 +60,27 @@ export function AnimatedTimeline({ entries }: AnimatedTimelineProps) {
   useEffect(() => {
     if (!isMobile || !timelineRef.current) return;
 
-    let animationFrame: number;
-    
     const updateProgress = () => {
       if (!timelineRef.current) return;
       
       const rect = timelineRef.current.getBoundingClientRect();
       const windowHeight = window.innerHeight;
       
-      // Calculate progress based on how much of the timeline is visible
+      // Simplified progress calculation
       const timelineTop = rect.top;
-      const timelineBottom = rect.bottom;
       const timelineHeight = rect.height;
       
-      let progress = 0;
+      // Calculate how much of the timeline has been scrolled past
+      const scrolledPast = Math.max(0, windowHeight - timelineTop);
+      const progress = Math.min(1, scrolledPast / timelineHeight);
       
-      if (timelineTop <= windowHeight && timelineBottom >= 0) {
-        // Timeline is in viewport
-        const visibleTop = Math.max(0, -timelineTop);
-        const visibleBottom = Math.min(timelineHeight, windowHeight - timelineTop);
-        const visibleHeight = visibleBottom - visibleTop;
-        
-        progress = Math.min(1, visibleHeight / timelineHeight);
-      }
-      
+      console.log('Progress update:', { timelineTop, timelineHeight, scrolledPast, progress, height: progress * 100 }); // Debug log
       setProgressHeight(progress * 100);
-      
-      animationFrame = requestAnimationFrame(updateProgress);
     };
 
     // Use passive scroll listener for better performance
     const handleScroll = () => {
-      if (animationFrame) {
-        cancelAnimationFrame(animationFrame);
-      }
-      animationFrame = requestAnimationFrame(updateProgress);
+      updateProgress();
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
@@ -101,9 +88,6 @@ export function AnimatedTimeline({ entries }: AnimatedTimelineProps) {
 
     return () => {
       window.removeEventListener('scroll', handleScroll);
-      if (animationFrame) {
-        cancelAnimationFrame(animationFrame);
-      }
     };
   }, [isMobile, filteredEntries]);
 
@@ -170,13 +154,14 @@ export function AnimatedTimeline({ entries }: AnimatedTimelineProps) {
             variants={timelineLineVariants}
             initial="hidden"
             animate={isInView ? "visible" : "hidden"}
-            className="absolute left-4 top-0 w-px"
+            className="absolute left-4 top-0 w-1 z-20"
             style={{ 
               transformOrigin: 'top',
               height: `${progressHeight}%`,
-              background: 'linear-gradient(to bottom, hsl(var(--primary)), hsl(var(--primary) / 0.8), hsl(var(--primary) / 0.6))',
-              boxShadow: '0 0 8px hsl(var(--primary) / 0.5), 0 0 16px hsl(var(--primary) / 0.3)',
-              transition: 'height 0.1s ease-out'
+              background: 'linear-gradient(to bottom, #3b82f6, #1d4ed8, #1e40af)',
+              boxShadow: '0 0 12px #3b82f6, 0 0 24px #3b82f6, 0 0 36px #3b82f6',
+              borderRadius: '2px',
+              transition: 'height 0.15s ease-out'
             }}
           />
         )}
