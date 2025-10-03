@@ -267,7 +267,7 @@ export function ConstellationBackground() {
               transition={{ delay: line.delay }}
             >
               {/* Drawing animation - line draws from start to end */}
-              <motion.animate
+              <animate
                 attributeName="stroke-dashoffset"
                 values="200;0;0;200"
                 dur={`${animationDuration}s`}
@@ -278,7 +278,7 @@ export function ConstellationBackground() {
               />
               
               {/* Opacity animation - fade in while drawing, stay visible, then fade out */}
-              <motion.animate
+              <animate
                 attributeName="stroke-opacity"
                 values="0;0.3;0.3;0"
                 dur={`${animationDuration}s`}
@@ -289,7 +289,7 @@ export function ConstellationBackground() {
               />
               
               {/* Width pulsing while visible */}
-              <motion.animate
+              <animate
                 attributeName="stroke-width"
                 values={`${baseWidth * 0.6};${baseWidth * 1.3};${baseWidth * 0.6}`}
                 dur="1.5s"
