@@ -171,7 +171,7 @@ export function AnimatedTimeline({ entries }: AnimatedTimelineProps) {
               height: `${progressHeight}%`,
               background: 'linear-gradient(to bottom, #3b82f6, #1d4ed8, #1e40af)',
               boxShadow: '0 0 4px #3b82f6, 0 0 8px #3b82f6',
-              transition: 'height 0.2s ease-out'
+              transition: 'height 0.6s ease-out'
             }}
           />
         )}
