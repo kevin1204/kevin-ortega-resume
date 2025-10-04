@@ -19,7 +19,7 @@ export async function Footer() {
   ];
 
   const quickLinks = [
-    { name: 'About', href: '/about' },
+    { name: 'About Me', href: '/about' },
     { name: 'Timeline', href: '/timeline' },
     { name: 'Projects', href: '/projects' },
     { name: 'Contact', href: '/contact' },

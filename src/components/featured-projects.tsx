@@ -66,8 +66,12 @@ export function FeaturedProjects({ projects }: FeaturedProjectsProps) {
               viewport={{ once: true, amount: 0.3 }}
             >
               <MagneticCard className="h-full" intensity={0.15}>
-                <Card className="group overflow-hidden border-0 glass hover:shadow-2xl transition-all duration-500 hover:border-primary/20 h-full">
-                  <CardContent className="p-0 h-full flex flex-col">
+                <div className="group relative p-1">
+                  {/* Outer border effect - wrapper approach */}
+                  <div className="absolute inset-x-0.5 inset-y-0.5 rounded-lg border-2 border-transparent group-hover:border-primary/60 transition-all duration-500 group-hover:animate-pulse z-10"></div>
+                  <div className="absolute inset-x-0.5 inset-y-0.5 rounded-lg border border-primary/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10"></div>
+                  <Card className="overflow-hidden border-0 glass hover:shadow-2xl transition-all duration-500 hover:shadow-primary/10 h-full relative z-20">
+                  <CardContent className="p-0 h-full flex flex-col relative z-20">
                     <motion.div 
                       className="relative overflow-hidden flex-1"
                       initial={{ opacity: 0, scale: 1.1 }}
@@ -163,7 +167,8 @@ export function FeaturedProjects({ projects }: FeaturedProjectsProps) {
                       </Button>
                     </motion.div>
                   </CardContent>
-                </Card>
+                  </Card>
+                </div>
               </MagneticCard>
             </motion.div>
           ))}

@@ -68,11 +68,14 @@ export function CertificationsGrid({ certifications }: CertificationsGridProps) 
               className="h-full"
             >
               <motion.div {...touchFeedback} className="h-full">
-                <Card className="group h-full transition-all duration-300 hover:shadow-lg">
-              <CardContent className="p-6 h-full flex flex-col">
+                <Card className="group h-full transition-all duration-300 hover:shadow-lg hover:border-primary/60 hover:shadow-primary/10 relative overflow-hidden">
+                  {/* Running line outline effect */}
+                  <div className="absolute inset-0 rounded-lg border-2 border-transparent group-hover:border-primary/30 transition-all duration-500 group-hover:animate-pulse z-10"></div>
+                  <div className="absolute inset-0 rounded-lg border border-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10"></div>
+              <CardContent className="p-6 h-full flex flex-col relative z-20">
                 <div className="flex items-start justify-between mb-4">
                   <div className="flex-1">
-                    <h3 className="text-lg font-semibold mb-2 line-clamp-2">
+                    <h3 className="text-lg font-semibold mb-2 line-clamp-2 group-hover:text-primary transition-colors duration-300">
                       {certification.name}
                     </h3>
                     <p className="text-sm text-muted-foreground mb-2">
