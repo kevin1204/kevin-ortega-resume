@@ -178,7 +178,7 @@ export function AnimatedTimeline({ entries }: AnimatedTimelineProps) {
                 0 0 30px rgba(59, 130, 246, 0.3)
               `,
               filter: 'blur(0.5px)',
-              transition: 'height 1.2s ease-out, box-shadow 1.2s ease-out'
+              transition: 'height 0.8s ease-out'
             }}
           />
         )}
