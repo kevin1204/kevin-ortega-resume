@@ -165,7 +165,7 @@ export function AnimatedTimeline({ entries }: AnimatedTimelineProps) {
             variants={timelineLineVariants}
             initial="hidden"
             animate={isInView ? "visible" : "hidden"}
-            className="absolute left-4 top-0 w-px mr-4 z-20"
+            className="absolute left-4 top-0 w-px mr-2 z-20"
             style={{ 
               transformOrigin: 'top',
               height: `${progressHeight}%`,
