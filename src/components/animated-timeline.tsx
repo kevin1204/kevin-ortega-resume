@@ -66,15 +66,35 @@ export function AnimatedTimeline({ entries }: AnimatedTimelineProps) {
       const rect = timelineRef.current.getBoundingClientRect();
       const windowHeight = window.innerHeight;
       
-      // Simplified progress calculation
+      // More reliable progress calculation
       const timelineTop = rect.top;
+      const timelineBottom = rect.bottom;
       const timelineHeight = rect.height;
       
-      // Calculate how much of the timeline has been scrolled past
-      const scrolledPast = Math.max(0, windowHeight - timelineTop);
-      const progress = Math.min(1, scrolledPast / timelineHeight);
+      let progress = 0;
       
-      console.log('Progress update:', { timelineTop, timelineHeight, scrolledPast, progress, height: progress * 100 }); // Debug log
+      // If timeline is above viewport, progress is 0
+      if (timelineBottom < 0) {
+        progress = 0;
+      }
+      // If timeline is below viewport, progress is 1
+      else if (timelineTop > windowHeight) {
+        progress = 1;
+      }
+      // If timeline is in viewport, calculate based on how much has been scrolled
+      else {
+        const scrolledPast = windowHeight - timelineTop;
+        progress = Math.min(1, Math.max(0, scrolledPast / timelineHeight));
+      }
+      
+      console.log('Progress update:', { 
+        timelineTop, 
+        timelineBottom, 
+        timelineHeight, 
+        windowHeight,
+        progress, 
+        height: progress * 100 
+      }); // Debug log
       setProgressHeight(progress * 100);
     };
 
@@ -150,20 +170,28 @@ export function AnimatedTimeline({ entries }: AnimatedTimelineProps) {
         
         {/* Progress timeline line (mobile only) */}
         {isMobile && (
-          <motion.div
-            variants={timelineLineVariants}
-            initial="hidden"
-            animate={isInView ? "visible" : "hidden"}
-            className="absolute left-4 top-0 w-1 z-20"
-            style={{ 
-              transformOrigin: 'top',
-              height: `${progressHeight}%`,
-              background: 'linear-gradient(to bottom, #3b82f6, #1d4ed8, #1e40af)',
-              boxShadow: '0 0 12px #3b82f6, 0 0 24px #3b82f6, 0 0 36px #3b82f6',
-              borderRadius: '2px',
-              transition: 'height 0.15s ease-out'
-            }}
-          />
+          <>
+            {/* Debug: Always visible red line to test positioning */}
+            <div 
+              className="absolute left-4 top-0 w-2 h-full bg-red-500 z-30 opacity-50"
+              style={{ height: '100%' }}
+            />
+            {/* Actual progress line */}
+            <motion.div
+              variants={timelineLineVariants}
+              initial="hidden"
+              animate={isInView ? "visible" : "hidden"}
+              className="absolute left-4 top-0 w-2 z-20"
+              style={{ 
+                transformOrigin: 'top',
+                height: `${progressHeight}%`,
+                background: 'linear-gradient(to bottom, #3b82f6, #1d4ed8, #1e40af)',
+                boxShadow: '0 0 8px #3b82f6, 0 0 16px #3b82f6, 0 0 24px #3b82f6',
+                borderRadius: '4px',
+                transition: 'height 0.2s ease-out'
+              }}
+            />
+          </>
         )}
 
         <motion.div
