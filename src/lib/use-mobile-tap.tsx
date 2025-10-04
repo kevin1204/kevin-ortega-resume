@@ -1,7 +1,6 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
 
 // Hook to detect mobile devices
 export function useMobileTap() {
@@ -28,7 +27,7 @@ export const getMobileTapProps = (isMobile: boolean) => {
       scale: 0.98,
       transition: { 
         duration: 0.15, 
-        ease: "easeOut" 
+        ease: [0.4, 0.0, 0.2, 1] 
       }
     }
   } : {};

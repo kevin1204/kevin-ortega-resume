@@ -20,7 +20,6 @@ interface CertificationsGridProps {
 }
 
 export function CertificationsGrid({ certifications }: CertificationsGridProps) {
-  const [isLoading, setIsLoading] = useState(false);
   const isMobile = useMobileTap();
 
   // Debug log to see if certifications are being passed
@@ -41,9 +40,7 @@ export function CertificationsGrid({ certifications }: CertificationsGridProps) 
       </div>
 
       {/* Certifications Grid */}
-      {isLoading ? (
-        <LoadingGrid count={6} />
-      ) : !certifications || certifications.length === 0 ? (
+      {!certifications || certifications.length === 0 ? (
         <div className="text-center py-12">
           <p className="text-muted-foreground">No certifications found.</p>
         </div>

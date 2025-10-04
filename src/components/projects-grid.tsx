@@ -22,7 +22,6 @@ interface ProjectsGridProps {
 }
 
 export function ProjectsGrid({ projects }: ProjectsGridProps) {
-  const [isLoading, setIsLoading] = useState(false);
   const isMobile = useMobileTap();
 
   // Debug log to see if projects are being passed
@@ -36,9 +35,6 @@ export function ProjectsGrid({ projects }: ProjectsGridProps) {
       </div>
 
       {/* Projects Grid */}
-      {isLoading ? (
-        <LoadingGrid count={6} />
-      ) : (
         <motion.div
           variants={gridStaggerVariants}
           initial="hidden"
@@ -135,7 +131,6 @@ export function ProjectsGrid({ projects }: ProjectsGridProps) {
           </motion.div>
         ))}
         </motion.div>
-      )}
 
     </div>
   );
