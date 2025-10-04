@@ -27,7 +27,7 @@ export const getMobileTapProps = (isMobile: boolean) => {
       scale: 0.98,
       transition: { 
         duration: 0.15, 
-        ease: [0.4, 0.0, 0.2, 1] 
+        ease: "easeOut" as const
       }
     }
   } : {};

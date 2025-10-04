@@ -1,7 +1,6 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
@@ -15,7 +14,6 @@ import {
   mobileScrollReveal
 } from '@/lib/animations';
 import { useMobileTap, getMobileTapProps } from '@/lib/use-mobile-tap';
-import { LoadingGrid } from '@/components/loading';
 
 interface ProjectsGridProps {
   projects: Project[];

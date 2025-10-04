@@ -1,7 +1,6 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -13,7 +12,6 @@ import {
   mobileScrollReveal
 } from '@/lib/animations';
 import { useMobileTap, getMobileTapProps } from '@/lib/use-mobile-tap';
-import { LoadingGrid } from '@/components/loading';
 
 interface CertificationsGridProps {
   certifications: Certification[];
