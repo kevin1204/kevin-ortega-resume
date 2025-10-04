@@ -129,14 +129,10 @@ export function ImageModal({ images, currentIndex, isOpen, onClose, projectTitle
           className="relative max-w-[90vw] max-h-[90vh] mx-4"
           onClick={(e) => e.stopPropagation()}
         >
-          <Image
+          <img
             src={images[activeIndex]}
             alt={`${projectTitle} screenshot ${activeIndex + 1}`}
-            width={1200}
-            height={800}
             className="w-full h-full object-contain rounded-lg shadow-2xl"
-            priority
-            unoptimized={true}
           />
         </motion.div>
 
