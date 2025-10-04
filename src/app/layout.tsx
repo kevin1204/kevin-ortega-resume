@@ -89,6 +89,21 @@ export default function RootLayout({
             `,
           }}
         />
+        {/* Google Analytics */}
+        <script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=G-XLYN6JH1KM"
+        />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-XLYN6JH1KM');
+            `,
+          }}
+        />
         <script
           dangerouslySetInnerHTML={{
             __html: `
