@@ -380,7 +380,7 @@ export const mobileTapFeedback = {
     scale: 0.98,
     transition: { 
       duration: 0.15, 
-      ease: "easeOut" 
+      ease: [0.4, 0.0, 0.2, 1] 
     }
   }
 };
