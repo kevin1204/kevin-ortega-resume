@@ -161,26 +161,54 @@ export function AnimatedTimeline({ entries }: AnimatedTimelineProps) {
         
         {/* Progress timeline line (mobile only) */}
         {isMobile && (
-          <motion.div
-            variants={timelineLineVariants}
-            initial="hidden"
-            animate={isInView ? "visible" : "hidden"}
-            className="absolute left-4 top-0 w-px mr-2 z-20"
-            style={{ 
-              transformOrigin: 'top',
-              height: `${progressHeight}%`,
-              background: 'linear-gradient(to bottom, #60a5fa, #3b82f6, #1d4ed8)',
-              boxShadow: `
-                0 0 6px #60a5fa,
-                0 0 12px #3b82f6,
-                0 0 18px #1d4ed8,
-                0 0 24px rgba(59, 130, 246, 0.5),
-                0 0 30px rgba(59, 130, 246, 0.3)
-              `,
-              filter: 'blur(0.5px)',
-              transition: 'height 0.8s ease-out'
-            }}
-          />
+          <>
+            <motion.div
+              variants={timelineLineVariants}
+              initial="hidden"
+              animate={isInView ? "visible" : "hidden"}
+              className="absolute left-4 top-0 w-px mr-2 z-20"
+              style={{ 
+                transformOrigin: 'top',
+                height: `${progressHeight}%`,
+                background: 'linear-gradient(to bottom, #60a5fa, #3b82f6, #1d4ed8)',
+                boxShadow: `
+                  0 0 6px #60a5fa,
+                  0 0 12px #3b82f6,
+                  0 0 18px #1d4ed8,
+                  0 0 24px rgba(59, 130, 246, 0.5),
+                  0 0 30px rgba(59, 130, 246, 0.3)
+                `,
+                filter: 'blur(0.5px)',
+                transition: 'height 0.8s ease-out'
+              }}
+            />
+            
+            {/* Progress dots along the line */}
+            {filteredEntries.map((entry, index) => {
+              const dotPosition = (index / (filteredEntries.length - 1)) * 100;
+              const isReached = progressHeight >= dotPosition;
+              
+              return (
+                <motion.div
+                  key={`progress-dot-${entry.id}`}
+                  variants={timelineLineVariants}
+                  initial="hidden"
+                  animate={isInView ? "visible" : "hidden"}
+                  className="absolute left-4 w-2 h-2 rounded-full z-30 transform -translate-x-1/2"
+                  style={{
+                    top: `${dotPosition}%`,
+                    background: isReached 
+                      ? 'linear-gradient(45deg, #60a5fa, #3b82f6)' 
+                      : 'rgba(59, 130, 246, 0.3)',
+                    boxShadow: isReached 
+                      ? '0 0 8px #60a5fa, 0 0 16px #3b82f6' 
+                      : '0 0 4px rgba(59, 130, 246, 0.5)',
+                    transition: 'all 0.8s ease-out'
+                  }}
+                />
+              );
+            })}
+          </>
         )}
 
         <motion.div
