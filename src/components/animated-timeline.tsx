@@ -169,9 +169,16 @@ export function AnimatedTimeline({ entries }: AnimatedTimelineProps) {
             style={{ 
               transformOrigin: 'top',
               height: `${progressHeight}%`,
-              background: 'linear-gradient(to bottom, #3b82f6, #1d4ed8, #1e40af)',
-              boxShadow: '0 0 4px #3b82f6, 0 0 8px #3b82f6',
-              transition: 'height 0.6s ease-out'
+              background: 'linear-gradient(to bottom, #60a5fa, #3b82f6, #1d4ed8)',
+              boxShadow: `
+                0 0 6px #60a5fa,
+                0 0 12px #3b82f6,
+                0 0 18px #1d4ed8,
+                0 0 24px rgba(59, 130, 246, 0.5),
+                0 0 30px rgba(59, 130, 246, 0.3)
+              `,
+              filter: 'blur(0.5px)',
+              transition: 'height 0.6s ease-out, box-shadow 0.6s ease-out'
             }}
           />
         )}
