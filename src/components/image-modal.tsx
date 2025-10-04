@@ -136,6 +136,7 @@ export function ImageModal({ images, currentIndex, isOpen, onClose, projectTitle
             height={800}
             className="w-full h-full object-contain rounded-lg shadow-2xl"
             priority
+            unoptimized={true}
           />
         </motion.div>
 
