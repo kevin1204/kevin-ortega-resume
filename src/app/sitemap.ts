@@ -6,37 +6,37 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   
   const staticRoutes = [
     {
-      url: 'https://kevin-resume.vercel.app',
+      url: 'https://kevinortega.me',
       lastModified: new Date(),
       changeFrequency: 'monthly' as const,
       priority: 1,
     },
     {
-      url: 'https://kevin-resume.vercel.app/about',
+      url: 'https://kevinortega.me/about',
       lastModified: new Date(),
       changeFrequency: 'monthly' as const,
       priority: 0.8,
     },
     {
-      url: 'https://kevin-resume.vercel.app/timeline',
+      url: 'https://kevinortega.me/timeline',
       lastModified: new Date(),
       changeFrequency: 'monthly' as const,
       priority: 0.8,
     },
     {
-      url: 'https://kevin-resume.vercel.app/certifications',
+      url: 'https://kevinortega.me/certifications',
       lastModified: new Date(),
       changeFrequency: 'monthly' as const,
       priority: 0.7,
     },
     {
-      url: 'https://kevin-resume.vercel.app/projects',
+      url: 'https://kevinortega.me/projects',
       lastModified: new Date(),
       changeFrequency: 'weekly' as const,
       priority: 0.9,
     },
     {
-      url: 'https://kevin-resume.vercel.app/contact',
+      url: 'https://kevinortega.me/contact',
       lastModified: new Date(),
       changeFrequency: 'monthly' as const,
       priority: 0.6,
@@ -44,7 +44,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   ];
 
   const projectRoutes = projects.map((project) => ({
-    url: `https://kevin-resume.vercel.app/projects/${project.slug}`,
+    url: `https://kevinortega.me/projects/${project.slug}`,
     lastModified: new Date(),
     changeFrequency: 'monthly' as const,
     priority: 0.7,

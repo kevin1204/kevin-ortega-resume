@@ -37,7 +37,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://kevin-resume.vercel.app",
+    url: "https://kevinortega.me",
     title: "Kevin Ortega Rodriguez - Full Stack Developer & Solutions Architect",
     description: "I architect and build comprehensive digital solutions that drive business growth. Full Stack Developer, Technical Account Manager, and Founder & CEO of WebLoft Studio.",
     siteName: "Kevin Ortega Rodriguez",
