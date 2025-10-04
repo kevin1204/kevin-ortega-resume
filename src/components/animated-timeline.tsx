@@ -45,7 +45,6 @@ export function AnimatedTimeline({ entries }: AnimatedTimelineProps) {
     const checkMobile = () => {
       const mobile = window.innerWidth <= 768;
       setIsMobile(mobile);
-      console.log('Mobile detected:', mobile, 'Width:', window.innerWidth); // Debug log
       if (!mobile) {
         setProgressHeight(0); // Reset progress on desktop
       }
@@ -87,14 +86,6 @@ export function AnimatedTimeline({ entries }: AnimatedTimelineProps) {
         progress = Math.min(1, Math.max(0, scrolledPast / timelineHeight));
       }
       
-      console.log('Progress update:', { 
-        timelineTop, 
-        timelineBottom, 
-        timelineHeight, 
-        windowHeight,
-        progress, 
-        height: progress * 100 
-      }); // Debug log
       setProgressHeight(progress * 100);
     };
 
@@ -170,28 +161,19 @@ export function AnimatedTimeline({ entries }: AnimatedTimelineProps) {
         
         {/* Progress timeline line (mobile only) */}
         {isMobile && (
-          <>
-            {/* Debug: Always visible red line to test positioning */}
-            <div 
-              className="absolute left-4 top-0 w-2 h-full bg-red-500 z-30 opacity-50"
-              style={{ height: '100%' }}
-            />
-            {/* Actual progress line */}
-            <motion.div
-              variants={timelineLineVariants}
-              initial="hidden"
-              animate={isInView ? "visible" : "hidden"}
-              className="absolute left-4 top-0 w-2 z-20"
-              style={{ 
-                transformOrigin: 'top',
-                height: `${progressHeight}%`,
-                background: 'linear-gradient(to bottom, #3b82f6, #1d4ed8, #1e40af)',
-                boxShadow: '0 0 8px #3b82f6, 0 0 16px #3b82f6, 0 0 24px #3b82f6',
-                borderRadius: '4px',
-                transition: 'height 0.2s ease-out'
-              }}
-            />
-          </>
+          <motion.div
+            variants={timelineLineVariants}
+            initial="hidden"
+            animate={isInView ? "visible" : "hidden"}
+            className="absolute left-4 top-0 w-px z-20"
+            style={{ 
+              transformOrigin: 'top',
+              height: `${progressHeight}%`,
+              background: 'linear-gradient(to bottom, #3b82f6, #1d4ed8, #1e40af)',
+              boxShadow: '0 0 4px #3b82f6, 0 0 8px #3b82f6',
+              transition: 'height 0.2s ease-out'
+            }}
+          />
         )}
 
         <motion.div
