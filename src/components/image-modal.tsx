@@ -162,11 +162,9 @@ export function ImageModal({ images, currentIndex, isOpen, onClose, projectTitle
                     : 'border-transparent hover:border-white/50'
                 }`}
               >
-                <Image
+                <img
                   src={image}
                   alt={`Thumbnail ${index + 1}`}
-                  width={64}
-                  height={64}
                   className="w-full h-full object-cover"
                 />
               </button>

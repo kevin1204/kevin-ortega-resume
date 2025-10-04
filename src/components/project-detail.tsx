@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { ArrowLeft, ExternalLink, Calendar, User } from 'lucide-react';
+import { ArrowLeft, ExternalLink, User } from 'lucide-react';
 import type { Project } from '@/lib/types';
 import { fadeInUp, staggerContainer, staggerItem } from '@/lib/animations';
 import { ImageModal } from '@/components/image-modal';
@@ -56,13 +56,10 @@ export function ProjectDetail({ project }: ProjectDetailProps) {
           {/* Hero section */}
           <motion.div variants={staggerItem}>
             <div className="relative overflow-hidden rounded-2xl mb-8">
-              <Image
+              <img
                 src={project.cover}
                 alt={project.title}
-                width={1200}
-                height={600}
                 className="w-full h-96 object-cover"
-                priority
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
               <div className="absolute bottom-6 left-6 right-6">
