@@ -370,7 +370,18 @@ export const touchFeedback = {
     scale: 0.96
   },
   transition: { 
-    duration: 0.1
+    duration: 0.1 
+  }
+};
+
+// Mobile-only tap feedback (smooth and subtle)
+export const mobileTapFeedback = {
+  whileTap: { 
+    scale: 0.98,
+    transition: { 
+      duration: 0.15, 
+      ease: "easeOut" 
+    }
   }
 };
 

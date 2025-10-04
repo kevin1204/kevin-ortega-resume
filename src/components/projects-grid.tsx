@@ -12,9 +12,9 @@ import type { Project } from '@/lib/types';
 import { 
   gridStaggerVariants, 
   gridItemVariants,
-  mobileScrollReveal,
-  touchFeedback
+  mobileScrollReveal
 } from '@/lib/animations';
+import { useMobileTap, getMobileTapProps } from '@/lib/use-mobile-tap';
 import { LoadingGrid } from '@/components/loading';
 
 interface ProjectsGridProps {
@@ -23,6 +23,7 @@ interface ProjectsGridProps {
 
 export function ProjectsGrid({ projects }: ProjectsGridProps) {
   const [isLoading, setIsLoading] = useState(false);
+  const isMobile = useMobileTap();
 
   // Debug log to see if projects are being passed
   console.log('ProjectsGrid received projects:', projects?.length || 0);
@@ -58,7 +59,7 @@ export function ProjectsGrid({ projects }: ProjectsGridProps) {
               )}
               className="h-full"
             >
-              <motion.div {...touchFeedback} className="h-full">
+              <motion.div {...getMobileTapProps(isMobile)} className="h-full">
                 <Card className="group h-full overflow-hidden transition-all duration-300 hover:shadow-lg hover:border-primary/60 hover:shadow-primary/10 relative">
                   {/* Running line outline effect */}
                   <div className="absolute inset-0 rounded-lg border-2 border-transparent group-hover:border-primary/30 transition-all duration-500 group-hover:animate-pulse z-10"></div>

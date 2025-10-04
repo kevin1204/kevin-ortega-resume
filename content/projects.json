@@ -9,8 +9,9 @@
     "cover": "/PROJECTS/AMIGO CONTRACTING SERVICES.png",
     "gallery": [
       "/PROJECTS/AMIGO CONTRACTING SERVICES.png",
-      "https://picsum.photos/seed/amigo-2/800/600",
-      "https://picsum.photos/seed/amigo-3/800/600"
+      "/projects/gallery/amigo-contracting-1-min.png",
+      "/projects/gallery/amigo-contracting-2-min.png",
+      "/projects/gallery/amigo-contracting-3-min.png"
     ],
     "links": {
       "live": "https://amigocontracting.com/"
@@ -33,7 +34,9 @@
     "cover": "/PROJECTS/AERIES.png",
     "gallery": [
       "/PROJECTS/AERIES.png",
-      "https://picsum.photos/seed/aeries-2/800/600"
+      "/projects/gallery/aeries-1-min.png",
+      "/projects/gallery/aeries-2-min.png",
+      "/projects/gallery/aeries-3-min.png"
     ],
     "links": {
       "live": "https://wfm5-level-3.webflow.io/"
@@ -56,8 +59,8 @@
     "cover": "/PROJECTS/FLOWGA.png",
     "gallery": [
       "/PROJECTS/FLOWGA.png",
-      "https://picsum.photos/seed/flowga-2/800/600",
-      "https://picsum.photos/seed/flowga-3/800/600"
+      "/projects/gallery/flowga-1-min.png",
+      "/projects/gallery/flowga-2-min.png"
     ],
     "links": {
       "live": "https://flowgav2.webflow.io/"
@@ -80,7 +83,12 @@
     "cover": "/PROJECTS/SPORTLINK.png",
     "gallery": [
       "/PROJECTS/SPORTLINK.png",
-      "https://picsum.photos/seed/sportlink-2/800/600"
+      "/projects/gallery/sportlink1-min.png",
+      "/projects/gallery/sportlink2-min.png",
+      "/projects/gallery/sportlink3-min.png",
+      "/projects/gallery/sportlink4-min.png",
+      "/projects/gallery/sportlink5-min.png",
+      "/projects/gallery/sportlink6-min.png"
     ],
     "links": {
       "live": "https://wfm5-level-1-course-build-725271.design.webflow.com/"
@@ -103,8 +111,9 @@
     "cover": "/PROJECTS/LILAHART.png",
     "gallery": [
       "/PROJECTS/LILAHART.png",
-      "https://picsum.photos/seed/lilahart-2/800/600",
-      "https://picsum.photos/seed/lilahart-3/800/600"
+      "/projects/gallery/lilahart3-min.png",
+      "/projects/gallery/lilahart4-min.png",
+      "/projects/gallery/lilahart5-min.png"
     ],
     "links": {
       "live": "https://wfm5-level-1-course-build-725271.webflow.io/"

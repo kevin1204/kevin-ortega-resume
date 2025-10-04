@@ -10,9 +10,9 @@ import type { Certification } from '@/lib/types';
 import { 
   gridStaggerVariants, 
   gridItemVariants,
-  mobileScrollReveal,
-  touchFeedback
+  mobileScrollReveal
 } from '@/lib/animations';
+import { useMobileTap, getMobileTapProps } from '@/lib/use-mobile-tap';
 import { LoadingGrid } from '@/components/loading';
 
 interface CertificationsGridProps {
@@ -21,6 +21,7 @@ interface CertificationsGridProps {
 
 export function CertificationsGrid({ certifications }: CertificationsGridProps) {
   const [isLoading, setIsLoading] = useState(false);
+  const isMobile = useMobileTap();
 
   // Debug log to see if certifications are being passed
   console.log('CertificationsGrid received certifications:', certifications?.length || 0);
@@ -67,7 +68,7 @@ export function CertificationsGrid({ certifications }: CertificationsGridProps) 
               )}
               className="h-full"
             >
-              <motion.div {...touchFeedback} className="h-full">
+              <motion.div {...getMobileTapProps(isMobile)} className="h-full">
                 <Card className="group h-full transition-all duration-300 hover:shadow-lg hover:border-primary/60 hover:shadow-primary/10 relative overflow-hidden">
                   {/* Running line outline effect */}
                   <div className="absolute inset-0 rounded-lg border-2 border-transparent group-hover:border-primary/30 transition-all duration-500 group-hover:animate-pulse z-10"></div>
