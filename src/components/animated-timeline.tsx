@@ -206,7 +206,7 @@ export function AnimatedTimeline({ entries }: AnimatedTimelineProps) {
                     viewport: { once: true, amount: 0.5 }
                   }
               )}
-              className="ml-8 sm:ml-16 flex-1 min-w-0"
+              className="ml-6 sm:ml-16 flex-1 min-w-0"
             >
               <motion.div {...touchFeedback} className="h-full">
               <Card 
