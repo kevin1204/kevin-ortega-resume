@@ -3,7 +3,6 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -183,6 +182,14 @@ export function ProjectDetail({ project }: ProjectDetailProps) {
                               console.error(`Failed to load image: ${image}`);
                               console.error('Full URL would be:', `${window.location.origin}${image}`);
                               console.error('Error:', e);
+                              console.error('Trying alternative paths...');
+                              // Try alternative paths
+                              const alternatives = [
+                                image.replace('/projects/', '/PROJECTS/'),
+                                image.replace('/projects/gallery/', '/PROJECTS/gallery/'),
+                                image.replace('/projects/gallery/', '/projects/GALLERY/'),
+                              ];
+                              console.error('Alternative paths:', alternatives);
                               setFailedImages(prev => new Set(prev).add(index));
                             }}
                             onLoad={() => {
