@@ -192,7 +192,7 @@ export function AnimatedTimeline({ entries }: AnimatedTimelineProps) {
             {/* Timeline dot */}
             <motion.div
               variants={timelineItemVariants}
-              className="absolute left-4 sm:left-8 w-4 h-4 bg-primary rounded-full border-4 border-background shadow-lg z-10 transform -translate-x-1/2"
+              className="absolute left-4 sm:left-8 w-4 h-4 bg-primary rounded-full border-4 border-background shadow-lg z-10 transform -translate-x-1/2 hidden sm:block"
             />
 
             {/* Content */}
