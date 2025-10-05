@@ -8,7 +8,6 @@ export interface SiteConfig {
   ogImage: string;
   links: {
     email: string;
-    phone: string;
     location: string;
     linkedin: string;
     github: string;

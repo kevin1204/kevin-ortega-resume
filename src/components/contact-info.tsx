@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Mail, Phone, MapPin, Linkedin, Github, ExternalLink } from 'lucide-react';
+import { Mail, MapPin, Linkedin, Github, ExternalLink } from 'lucide-react';
 import type { SiteConfig } from '@/lib/types';
 import { fadeInUp, staggerContainer, staggerItem } from '@/lib/animations';
 
@@ -19,12 +19,6 @@ export function ContactInfo({ siteConfig }: ContactInfoProps) {
       label: 'Email',
       value: siteConfig.links.email,
       href: `mailto:${siteConfig.links.email}`,
-    },
-    {
-      icon: Phone,
-      label: 'Phone',
-      value: siteConfig.links.phone,
-      href: `tel:${siteConfig.links.phone}`,
     },
     {
       icon: MapPin,

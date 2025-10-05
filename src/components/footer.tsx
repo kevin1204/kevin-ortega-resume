@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Github, Linkedin, Mail, Phone, MapPin } from 'lucide-react';
+import { Github, Linkedin, Mail, MapPin } from 'lucide-react';
 import { getSiteConfig } from '@/lib/content';
 
 export async function Footer() {
@@ -61,13 +61,6 @@ export async function Footer() {
               >
                 <Mail className="h-4 w-4" />
                 <span>Email</span>
-              </Link>
-              <Link
-                href={`tel:${siteConfig.links.phone}`}
-                className="flex items-center space-x-1 hover:text-primary transition-colors"
-              >
-                <Phone className="h-4 w-4" />
-                <span>Call</span>
               </Link>
             </div>
             
