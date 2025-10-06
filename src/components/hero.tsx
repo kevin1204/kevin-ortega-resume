@@ -110,7 +110,7 @@ export function Hero({ siteConfig }: HeroProps) {
             
             <motion.div variants={scrollRevealVariants}>
               <Button asChild variant="ghost" size="lg" className="group">
-                <a href="/resume.pdf" target="_blank" rel="noopener noreferrer" download="Kevin_Ortega-Resume.pdf">
+                <a href="/Kevin_Ortega-resume.pdf" target="_blank" rel="noopener noreferrer" download="Kevin_Ortega-Resume.pdf">
                   <Download className="mr-2 h-4 w-4" />
                   Download Resume
                 </a>

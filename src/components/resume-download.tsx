@@ -36,7 +36,7 @@ export function ResumeDownload() {
             <motion.div variants={fadeInUp}>
               <Button asChild size="lg" className="group">
                 <a 
-                  href="/resume.pdf" 
+                  href="/Kevin_Ortega-resume.pdf" 
                   target="_blank" 
                   rel="noopener noreferrer"
                   download="Kevin_Ortega-Resume.pdf"
