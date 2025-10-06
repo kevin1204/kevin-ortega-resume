@@ -41,11 +41,20 @@ export const metadata: Metadata = {
     title: "Kevin Ortega Rodriguez - Full Stack Developer & Solutions Architect",
     description: "I architect and build comprehensive digital solutions that drive business growth. Full Stack Developer, Technical Account Manager, and Founder & CEO of WebLoft Studio.",
     siteName: "Kevin Ortega Rodriguez",
+    images: [
+      {
+        url: "/favicon.png",
+        width: 32,
+        height: 32,
+        alt: "Kevin Ortega Rodriguez - Full Stack Developer & Solutions Architect",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Kevin Ortega Rodriguez - Full Stack Developer & Solutions Architect",
     description: "I architect and build comprehensive digital solutions that drive business growth. Full Stack Developer, Technical Account Manager, and Founder & CEO of WebLoft Studio.",
+    images: ["/favicon.png"],
   },
   robots: {
     index: true,

@@ -12,7 +12,7 @@ export function JsonLd() {
           jobTitle: 'Full Stack Developer & Solutions Architect',
           description: 'I architect and build comprehensive digital solutions that drive business growth. Full Stack Developer, Technical Account Manager, and Founder & CEO of WebLoft Studio.',
           url: 'https://kevin-resume.vercel.app',
-          image: 'https://kevin-resume.vercel.app/og-image.jpg',
+          image: 'https://kevinortega.me/favicon.png',
           sameAs: [
             'https://www.linkedin.com/in/ksor/',
             'https://github.com/kevin1204',

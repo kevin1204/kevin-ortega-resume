@@ -6,14 +6,11 @@ import { Button } from '@/components/ui/button';
 import { ArrowRight, Download, Eye } from 'lucide-react';
 import type { SiteConfig } from '@/lib/types';
 import { 
-  fadeInUp, 
-  staggerContainer, 
-  staggerItem, 
   scrollRevealVariants,
-  buttonHoverVariants,
   pageTransitionVariants
 } from '@/lib/animations';
 import { ConstellationBackground } from '@/components/constellation-background';
+import { TypewriterText } from '@/components/typewriter-text';
 
 interface HeroProps {
   siteConfig: SiteConfig;
@@ -40,7 +37,17 @@ export function Hero({ siteConfig }: HeroProps) {
               className="text-4xl font-bold tracking-tight font-display sm:text-6xl lg:text-7xl"
               variants={scrollRevealVariants}
             >
-              <span className="gradient-text">{siteConfig.name}</span>
+              <span className="gradient-text">
+                <TypewriterText 
+                  text={siteConfig.name}
+                  mobileText="Kevin Ortega" // Shorter text for mobile screens
+                  speed={100}
+                  delay={1000}
+                  repeat={true}
+                  repeatDelay={2000} // Pause duration after typing completes (in milliseconds)
+                  className="gradient-text"
+                />
+              </span>
             </motion.h1>
           </motion.div>
           
@@ -103,10 +110,10 @@ export function Hero({ siteConfig }: HeroProps) {
             
             <motion.div variants={scrollRevealVariants}>
               <Button asChild variant="ghost" size="lg" className="group">
-                <Link href="/resume.pdf" target="_blank" rel="noopener noreferrer">
+                <a href="/resume.pdf" target="_blank" rel="noopener noreferrer" download="Kevin_Ortega-Resume.pdf">
                   <Download className="mr-2 h-4 w-4" />
                   Download Resume
-                </Link>
+                </a>
               </Button>
             </motion.div>
           </motion.div>

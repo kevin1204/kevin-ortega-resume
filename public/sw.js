@@ -12,7 +12,7 @@ const STATIC_ASSETS = [
   '/contact',
   '/manifest.json',
   '/favicon.ico',
-  '/og-image.jpg'
+  '/favicon.png'
 ];
 
 // API routes to cache
