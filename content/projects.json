@@ -140,7 +140,7 @@
     "links": {
       "live": "https://webloftstudio.com"
     },
-    "tags": ["Agency", "Web Design", "Development"],
+    "tags": ["TypeScript", "Next.js", "React.js"],
     "metrics": [
       { "label": "Client Satisfaction", "value": "100%" },
       { "label": "Project Delivery", "value": "On Time" },
