@@ -125,5 +125,26 @@
       { "label": "User Retention", "value": "3.4min" }
     ],
     "featured": true
+  },
+  {
+    "id": "webloft-studio",
+    "slug": "webloft-studio",
+    "title": "WebLoft Studio",
+    "role": "Founder & CEO",
+    "summary": "Web design and development agency website showcasing modern digital solutions.",
+    "description": "A comprehensive agency website for WebLoft Studio, featuring modern design principles, service showcases, and client testimonials. Built to demonstrate our capabilities in web design and development while providing clear information about our services and process.",
+    "cover": "/PROJECTS/webloft.png",
+    "gallery": [
+      "/PROJECTS/webloft.png"
+    ],
+    "links": {
+      "live": "https://webloftstudio.com"
+    },
+    "tags": ["Agency", "Web Design", "Development"],
+    "metrics": [
+      { "label": "Client Satisfaction", "value": "100%" },
+      { "label": "Project Delivery", "value": "On Time" },
+      { "label": "Quality Score", "value": "A+" }
+    ],
+    "featured": true
   }
-]
