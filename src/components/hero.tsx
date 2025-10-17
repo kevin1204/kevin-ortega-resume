@@ -18,7 +18,7 @@ interface HeroProps {
 
 export function Hero({ siteConfig }: HeroProps) {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden w-full">
       {/* Constellation Background */}
       <ConstellationBackground />
 

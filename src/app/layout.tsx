@@ -138,9 +138,9 @@ export default function RootLayout({
         <ThemeProvider
           storageKey="kevin-resume-theme"
         >
-          <div className="relative flex min-h-screen flex-col">
+          <div className="relative flex min-h-screen flex-col overflow-x-hidden">
             <Header />
-            <main className="flex-1">{children}</main>
+            <main className="flex-1 overflow-x-hidden">{children}</main>
             <Footer />
           </div>
         </ThemeProvider>
